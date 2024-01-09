@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+section {
+  @apply my-16;
+}
