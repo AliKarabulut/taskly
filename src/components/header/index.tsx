@@ -15,9 +15,9 @@ const Header = () => {
           <div className="container mx-auto px-2 sm:px-8">
             <div className="flex h-16 justify-between">
               <div className="flex px-2 sm:px-0">
-                <div className="flex flex-shrink-0 items-center">
+                <Link href="/" className="flex flex-shrink-0 items-center">
                   <Image className="h-8 w-auto" src="/favicon.png" width={29} height={32} alt="Your Company" />
-                </div>
+                </Link>
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link
@@ -60,7 +60,6 @@ const Header = () => {
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white">AK</div>
-                      {/* <Image className="h-8 w-8 rounded-full" src="/favicon.png" alt="Image" width={29} height={32} /> */}
                     </Menu.Button>
                   </div>
                   <Transition
