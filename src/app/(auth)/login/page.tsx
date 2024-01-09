@@ -1,10 +1,35 @@
+'use client'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { useTransition } from 'react'
+
+import { LoginSchema } from '@/schemas'
 import Button from '@/components/button'
-import Checkbox from '@/components/checkbox'
 import GitHubIcon from '@/components/icons/github'
 import GoogleIcon from '@/components/icons/google'
 import Input from '@/components/input'
+import Checkbox from '@/components/checkbox'
 
 const Login = () => {
+  const [isPending, startTransition] = useTransition()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+    startTransition(() => {
+      console.log('values', values)
+    })
+  }
   return (
     <section>
       <div className="flex min-h-full flex-1 flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
@@ -14,10 +39,9 @@ const Login = () => {
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-            <form className="space-y-6" action="#" method="POST">
-              <Input label="Email address" name="email" type="email" />
-              <Input label="Password" name="password" type="password" />
-
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+              <Input label="Email address" type="email" {...register('email')} error={errors.email?.message} />
+              <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
               <div className="flex items-center justify-between">
                 <Checkbox label="Remember me" name="remember-me" />
                 <div className="text-sm leading-6">
@@ -27,7 +51,7 @@ const Login = () => {
                 </div>
               </div>
               <div>
-                <Button label="Sign In" className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+                <Button label="Sign In" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
               </div>
             </form>
 
@@ -42,10 +66,10 @@ const Login = () => {
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-4">
-                <Button label="Google" className="bg-[#1D9BF0] focus-visible:outline-[#1D9BF0]">
+                <Button label="Google" disabled={isPending} className="bg-[#1D9BF0] focus-visible:outline-[#1D9BF0]">
                   <GoogleIcon />
                 </Button>
-                <Button label="GitHub" className="bg-[#24292F] focus-visible:outline-[#24292F]">
+                <Button label="GitHub" disabled={isPending} className="bg-[#24292F] focus-visible:outline-[#24292F]">
                   <GitHubIcon />
                 </Button>
               </div>
