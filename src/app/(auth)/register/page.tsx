@@ -34,7 +34,7 @@ const Register = () => {
         if (data.error) {
           toast.error('Invalid credentials!')
         } else {
-          toast.success('Logged in successfully!')
+          toast.success('Email sent!')
         }
       })
     })
