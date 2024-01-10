@@ -32,6 +32,16 @@ const Header = () => {
                   </Link>
                 </div>
               </div>
+              <div className="flex flex-1 items-center justify-end gap-x-6 mr-2">
+                <Link href="/login" className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900">
+                  Log in
+                </Link>
+                <Link
+                  href="/register"
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  Sign up
+                </Link>
+              </div>
               <div className="flex items-center sm:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -44,7 +54,8 @@ const Header = () => {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="hidden sm:ml-4 sm:flex sm:items-center">
+
+              {/* <div className="hidden sm:ml-4 sm:flex sm:items-center">
                 <button
                   type="button"
                   className="relative flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -53,7 +64,6 @@ const Header = () => {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-4 flex-shrink-0">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -95,7 +105,7 @@ const Header = () => {
                     </Menu.Items>
                   </Transition>
                 </Menu>
-              </div>
+              </div> */}
             </div>
           </div>
 
