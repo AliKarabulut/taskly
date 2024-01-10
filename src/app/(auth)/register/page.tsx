@@ -11,6 +11,7 @@ import GitHubIcon from '@/components/icons/github'
 import GoogleIcon from '@/components/icons/google'
 import Input from '@/components/input'
 import { register as registerAction } from '@/actions/register'
+import Link from 'next/link'
 
 const Register = () => {
   const [isPending, startTransition] = useTransition()
@@ -32,9 +33,9 @@ const Register = () => {
     startTransition(() => {
       registerAction(values).then(data => {
         if (data.error) {
-          toast.error('Invalid credentials!')
-        } else {
-          toast.success('Email sent!')
+          toast.error(data.error)
+        } else if (data.success) {
+          toast.success(data.success)
         }
       })
     })
@@ -62,9 +63,9 @@ const Register = () => {
               />
               <div className="flex items-center justify-between">
                 <div className="text-sm leading-6">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <Link href="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Do you have an account? &nbsp;
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div>

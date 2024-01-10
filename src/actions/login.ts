@@ -7,8 +7,8 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   const validateValues = LoginSchema.safeParse(values)
 
   if (!validateValues.success) {
-    return { error: true }
+    return { error: 'Invalid credentials' }
   }
 
-  return { success: true }
+  return { success: 'User logged in!' }
 }
