@@ -32,7 +32,7 @@ const Header = () => {
                   </Link>
                 </div>
               </div>
-              <div className="flex flex-1 items-center justify-end gap-x-6 mr-2">
+              <div className="mr-2 flex flex-1 items-center justify-end gap-x-6">
                 <Link href="/login" className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900">
                   Log in
                 </Link>
