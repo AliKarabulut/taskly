@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 
 import './globals.css'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 import { sharedTitle, sharedDescription } from './shared-metadata'
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   )

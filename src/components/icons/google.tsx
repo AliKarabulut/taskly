@@ -10,6 +10,7 @@ const GoogleIcon: React.FC<GoogleIconProps> = ({ className, size = 24 }) => {
       className={className}
       width={size}
       height={size}
+      aria-hidden="true"
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="currentColor"

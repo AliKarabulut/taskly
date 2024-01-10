@@ -22,6 +22,7 @@ const Login = () => {
     defaultValues: {
       email: '',
       password: '',
+      rememberMe: false,
     },
   })
 
@@ -32,7 +33,7 @@ const Login = () => {
   }
   return (
     <section>
-      <div className="flex min-h-full flex-1 flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col items-center justify-center sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
         </div>
@@ -43,7 +44,7 @@ const Login = () => {
               <Input label="Email address" type="email" {...register('email')} error={errors.email?.message} />
               <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
               <div className="flex items-center justify-between">
-                <Checkbox label="Remember me" name="remember-me" />
+                <Checkbox label="Remember me" {...register('rememberMe')} />
                 <div className="text-sm leading-6">
                   <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Forgot password?
