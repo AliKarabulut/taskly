@@ -3,12 +3,14 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useTransition } from 'react'
+import toast from 'react-hot-toast'
 
 import { RegisterSchema } from '@/schemas'
 import Button from '@/components/button'
 import GitHubIcon from '@/components/icons/github'
 import GoogleIcon from '@/components/icons/google'
 import Input from '@/components/input'
+import { register as registerAction } from '@/actions/register'
 
 const Register = () => {
   const [isPending, startTransition] = useTransition()
@@ -19,16 +21,22 @@ const Register = () => {
   } = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name: '',
       email: '',
       password: '',
       confirmPassword: '',
+      name: '',
     },
   })
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     startTransition(() => {
-      console.log('values', values)
+      registerAction(values).then(data => {
+        if (data.error) {
+          toast.error('Invalid credentials!')
+        } else {
+          toast.success('Logged in successfully!')
+        }
+      })
     })
   }
 

@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useTransition } from 'react'
+import toast from 'react-hot-toast'
 
 import { LoginSchema } from '@/schemas'
 import Button from '@/components/button'
@@ -10,6 +11,7 @@ import GitHubIcon from '@/components/icons/github'
 import GoogleIcon from '@/components/icons/google'
 import Input from '@/components/input'
 import Checkbox from '@/components/checkbox'
+import { login } from '@/actions/login'
 
 const Login = () => {
   const [isPending, startTransition] = useTransition()
@@ -28,9 +30,16 @@ const Login = () => {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     startTransition(() => {
-      console.log('values', values)
+      login(values).then(data => {
+        if (data.error) {
+          toast.error('Invalid credentials!')
+        } else {
+          toast.success('Logged in successfully!')
+        }
+      })
     })
   }
+
   return (
     <section>
       <div className="flex min-h-full flex-1 flex-col items-center justify-center sm:px-6 lg:px-8">
