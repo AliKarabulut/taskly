@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useTransition } from 'react'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 
 import { LoginSchema } from '@/schemas'
 import Button from '@/components/button'
@@ -12,7 +13,6 @@ import GoogleIcon from '@/components/icons/google'
 import Input from '@/components/input'
 import Checkbox from '@/components/checkbox'
 import { login } from '@/actions/login'
-import Link from 'next/link'
 
 const Login = () => {
   const [isPending, startTransition] = useTransition()
