@@ -32,10 +32,8 @@ const Login = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     startTransition(() => {
       login(values).then(data => {
-        if (data.error) {
+        if (data?.error) {
           toast.error(data.error)
-        } else if (data.success) {
-          toast.success(data.success)
         }
       })
     })
