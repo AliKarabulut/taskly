@@ -8,11 +8,10 @@ import Link from 'next/link'
 
 import { LoginSchema } from '@/schemas'
 import Button from '@/components/button'
-import GitHubIcon from '@/components/icons/github'
-import GoogleIcon from '@/components/icons/google'
 import Input from '@/components/input'
 import Checkbox from '@/components/checkbox'
 import { login } from '@/actions/login'
+import LoginProvider from '@/components/login-providers'
 
 const Login = () => {
   const [isPending, startTransition] = useTransition()
@@ -73,15 +72,7 @@ const Login = () => {
                   <span className="bg-white px-6 text-gray-900">Or continue with</span>
                 </div>
               </div>
-
-              <div className="mt-6 grid grid-cols-2 gap-4">
-                <Button label="Google" disabled={isPending} className="bg-[#1D9BF0] focus-visible:outline-[#1D9BF0]">
-                  <GoogleIcon />
-                </Button>
-                <Button label="GitHub" disabled={isPending} className="bg-[#24292F] focus-visible:outline-[#24292F]">
-                  <GitHubIcon />
-                </Button>
-              </div>
+              <LoginProvider isPending={isPending} />
             </div>
           </div>
         </div>
