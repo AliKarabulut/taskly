@@ -26,7 +26,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   if (!user.emailVerified) {
     const verificationToken = await generateVerificationToken(user.email as string)
 
-    await fetch('/api/send-mail', {
+    await fetch(`${process.env.SITE_URL}/api/send-mail`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

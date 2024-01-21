@@ -37,7 +37,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: 'An error occurred while attempting to send the verification email. Please try again.' }
   }
 
-  await fetch('http://localhost:3000/api/send-mail', {
+  await fetch(`${process.env.SITE_URL}/api/send-mail`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
