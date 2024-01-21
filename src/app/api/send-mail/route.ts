@@ -40,11 +40,11 @@ export const POST = async (request: NextRequest) => {
     }
 
     await transporter.sendMail(mailOption, (err, info) => {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log(info)
-      }
+      // if (err) {
+      //   console.log(err)
+      // } else {
+      //   console.log(info)
+      // }
     })
 
     return NextResponse.json({ message: 'Confirmation Email Sent' }, { status: 200 })
