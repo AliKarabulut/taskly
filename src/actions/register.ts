@@ -37,7 +37,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     return { error: 'An error occurred while attempting to send the verification email. Please try again.' }
   }
 
-  await fetch(`${process.env.SITE_URL}/api/send-confirmation-mail`, {
+  const response = await fetch(`${process.env.SITE_URL}/api/send-confirmation-mail`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -45,5 +45,11 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     body: JSON.stringify({ email: verificationToken?.email, token: verificationToken?.token }),
   })
 
-  return { error: 'Confirmation email send!' }
+  const data = await response.json()
+
+  if (response.ok) {
+    return { success: data.message }
+  } else {
+    return { error: data.error }
+  }
 }

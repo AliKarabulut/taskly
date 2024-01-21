@@ -2,8 +2,7 @@
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useTransition } from 'react'
-import toast from 'react-hot-toast'
+import { useState, useTransition } from 'react'
 import Link from 'next/link'
 
 import { RegisterSchema } from '@/schemas'
@@ -11,9 +10,14 @@ import Button from '@/components/button'
 import Input from '@/components/input'
 import { register as registerAction } from '@/actions/register'
 import LoginProvider from '@/components/login-providers'
+import FormError from '@/components/form-error'
+import FormSuccess from '@/components/form-success'
 
 const Register = () => {
   const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>('')
+  const [success, setSuccess] = useState<string | null>('')
+
   const {
     register,
     handleSubmit,
@@ -31,10 +35,10 @@ const Register = () => {
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
     startTransition(() => {
       registerAction(values).then(data => {
-        if (data.error) {
-          toast.error(data.error)
-        } else if (data.success) {
-          toast.success(data.success)
+        if (data?.error) {
+          setError(data.error)
+        } else if (data?.success) {
+          setSuccess(data.success)
         }
       })
     })
@@ -68,6 +72,8 @@ const Register = () => {
                 </div>
               </div>
               <div>
+                {error && <FormError message={error} />}
+                {success && <FormSuccess message={success} />}
                 <Button label="Register" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
               </div>
             </form>

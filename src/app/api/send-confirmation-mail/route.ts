@@ -49,6 +49,11 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json({ message: 'Confirmation Email Sent' }, { status: 200 })
   } catch (err: unknown) {
-    return NextResponse.json({ message: 'Something went wrong' }, { status: 500 })
+    return NextResponse.json(
+      { message: 'An error occurred while attempting to send the confirmation email. Please try again' },
+      { status: 500 },
+    )
   }
 }
+
+export const dynamic = 'force-dynamic'

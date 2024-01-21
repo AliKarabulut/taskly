@@ -44,7 +44,6 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.3",
-    "react-hot-toast": "^2.4.1",
     "react-spinners": "^0.13.8",
     "tailwind-merge": "^2.2.0",
     "uuid": "^9.0.1",

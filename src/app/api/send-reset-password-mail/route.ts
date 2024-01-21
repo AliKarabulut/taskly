@@ -49,6 +49,11 @@ export const POST = async (request: NextRequest) => {
 
     return NextResponse.json({ message: 'Reset Password Email Sent' }, { status: 200 })
   } catch (err: unknown) {
-    return NextResponse.json({ error: 'An error occurred while attempting to send the reset email. Please try again' }, { status: 500 })
+    return NextResponse.json(
+      { error: 'An error occurred while attempting to send the password reset email. Please try again' },
+      { status: 500 },
+    )
   }
 }
+
+export const dynamic = 'force-dynamic'

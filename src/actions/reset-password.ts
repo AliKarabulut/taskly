@@ -5,11 +5,6 @@ import { ResetPasswordSchema } from '@/schemas'
 import { getUserByEmail } from '@/libs/user'
 import { generatePasswordResetToken } from '@/libs/token'
 
-type ResetPasswordResponse = {
-  error?: string
-  message?: string
-}
-
 export const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>) => {
   const validateValues = ResetPasswordSchema.safeParse(values)
 
@@ -39,9 +34,11 @@ export const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>)
     body: JSON.stringify({ email: passwordResetToken?.email, token: passwordResetToken?.token }),
   })
 
+  const data = await response.json()
+
   if (response.ok) {
-    return { message: response.message }
+    return { message: data.message }
   } else {
-    return { error: response.error }
+    return { error: data.error }
   }
 }

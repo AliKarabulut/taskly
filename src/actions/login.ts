@@ -26,15 +26,19 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
   if (!user.emailVerified) {
     const verificationToken = await generateVerificationToken(user.email as string)
 
-    await fetch(`${process.env.SITE_URL}/api/send-confirmation-mail`, {
+    const response = await fetch(`${process.env.SITE_URL}/api/send-confirmation-mail`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email: verificationToken?.email, token: verificationToken?.token }),
     })
-
-    return { error: 'Confirmation email send!! Please confirm your email' }
+    const data = await response.json()
+    if (response.ok) {
+      return { success: data.message }
+    } else {
+      return { error: data.error }
+    }
   }
 
   try {

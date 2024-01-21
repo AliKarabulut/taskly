@@ -2,8 +2,7 @@
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { useTransition } from 'react'
-import toast from 'react-hot-toast'
+import { useState, useTransition } from 'react'
 import Link from 'next/link'
 
 import { LoginSchema } from '@/schemas'
@@ -12,9 +11,13 @@ import Input from '@/components/input'
 import Checkbox from '@/components/checkbox'
 import { login } from '@/actions/login'
 import LoginProvider from '@/components/login-providers'
+import FormError from '@/components/form-error'
+import FormSuccess from '@/components/form-success'
 
 const Login = () => {
   const [isPending, startTransition] = useTransition()
+  const [error, setError] = useState<string | null>('')
+  const [success, setSuccess] = useState<string | null>('')
   const {
     register,
     handleSubmit,
@@ -32,7 +35,9 @@ const Login = () => {
     startTransition(() => {
       login(values).then(data => {
         if (data?.error) {
-          toast.error(data.error)
+          setError(data.error)
+        } else if (data?.success) {
+          setSuccess(data.success)
         }
       })
     })
@@ -59,6 +64,8 @@ const Login = () => {
                 </div>
               </div>
               <div>
+                {error && <FormError message={error} />}
+                {success && <FormSuccess message={success} />}
                 <Button label="Sign In" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
               </div>
             </form>
