@@ -6,7 +6,6 @@ import { client } from '@/libs/prismadb'
 import { RegisterSchema } from '@/schemas'
 import { getUserByEmail } from '@/libs/user'
 import { generateVerificationToken } from '@/libs/token'
-import sendVerificationEmail from '@/libs/mail'
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validateValues = RegisterSchema.safeParse(values)
@@ -34,11 +33,17 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   const verificationToken = await generateVerificationToken(email)
 
-  await sendVerificationEmail(verificationToken?.email as string, verificationToken?.token as string)
-
   if (!verificationToken) {
     return { error: 'An error occurred while attempting to send the verification email. Please try again.' }
   }
 
-  return { success: 'Confirmation email send!' }
+  await fetch('http://localhost:3000/api/send-mail', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email: verificationToken?.email, token: verificationToken?.token }),
+  })
+
+  return { error: 'Confirmation email send!' }
 }
