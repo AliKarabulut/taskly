@@ -23,14 +23,15 @@ export const {
     },
   },
   callbacks: {
-    // async signIn({ user }) {
-    //   const existingUser = await getUserById(user.id)
-    //   if (!existingUser || !existingUser.emailVerified) {
-    //     return false
-    //   }
+    async signIn({ user, account }) {
+      if (account?.provider !== 'credentials') return true
 
-    //   return true
-    // },
+      const existingUser = await getUserById(user.id)
+
+      if (!existingUser?.emailVerified) return false
+
+      return true
+    },
 
     async session({ session, token }) {
       if (token.sub && session.user) {
