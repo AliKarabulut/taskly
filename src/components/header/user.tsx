@@ -6,8 +6,14 @@ import { Fragment } from 'react'
 import cn from '@/utils/cn'
 import { user } from '@/constants/header'
 import Notification from '@/components/header/notification'
+import Avatar from '@/components/avatar'
 
-const NavigationMenu = () => {
+type NavigationMenuProps = {
+  name: string
+  src?: string
+}
+
+const NavigationMenu = ({ name, src }: NavigationMenuProps) => {
   return (
     <div className="hidden sm:ml-4 sm:flex sm:items-center">
       <Notification />
@@ -16,7 +22,7 @@ const NavigationMenu = () => {
         <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white">AK</div>
+          <Avatar name={name} src={src} />
         </Menu.Button>
 
         <Transition

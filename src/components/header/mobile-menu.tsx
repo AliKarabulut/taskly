@@ -7,8 +7,15 @@ import { Disclosure } from '@headlessui/react'
 import cn from '@/utils/cn'
 import { navigation, user } from '@/constants/header'
 import Notification from '@/components/header/notification'
+import Avatar from '@/components/avatar'
 
-const MobileMenu = () => {
+type MobileMenuProps = {
+  name: string
+  src?: string
+  email: string
+}
+
+const MobileMenu = ({ name, src, email }: MobileMenuProps) => {
   const pathname = usePathname()
 
   return (
@@ -39,10 +46,10 @@ const MobileMenu = () => {
             </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
-                <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white">AK</div>
+                <Avatar name={name} src={src} />
                 <div className="ml-3">
-                  <div className="text-base font-medium text-gray-800">Tom Cook</div>
-                  <div className="text-sm font-medium text-gray-500">tom@example.com</div>
+                  <div className="text-base font-medium text-gray-800">{name}</div>
+                  <div className="text-sm font-medium text-gray-500">{email}</div>
                 </div>
                 <Notification />
               </div>
