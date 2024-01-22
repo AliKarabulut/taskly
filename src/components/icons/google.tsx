@@ -6,8 +6,8 @@ type GoogleIconProps = {
 const GoogleIcon: React.FC<GoogleIconProps> = ({ className, size = 24 }) => {
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
       className={className}
+      xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
       aria-hidden="true"
