@@ -68,7 +68,6 @@ export const newPassword = async (values: z.infer<typeof NewPasswordScheme>, tok
       },
     })
   } catch (error) {
-    console.log(error)
     console.log('An error occurred while attempting to delete the password reset token')
   }
   return { success: 'Password reset successfully' }

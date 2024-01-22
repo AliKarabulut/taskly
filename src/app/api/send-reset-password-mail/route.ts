@@ -39,13 +39,7 @@ export const POST = async (request: NextRequest) => {
       `,
     }
 
-    await transporter.sendMail(mailOption, (err, info) => {
-      // if (err) {
-      //   console.log(err)
-      // } else {
-      //   console.log(info)
-      // }
-    })
+    await transporter.sendMail(mailOption)
 
     return NextResponse.json({ message: 'Reset Password Email Sent' }, { status: 200 })
   } catch (err: unknown) {
