@@ -50,25 +50,23 @@ const NewPassword = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">New Password</h2>
         </div>
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-              <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
-              <Input
-                label="Repeat Password"
-                id="confirmPassword"
-                type="password"
-                {...register('confirmPassword')}
-                error={errors.confirmPassword?.message}
-              />
+        <div className="mt-8 bg-white px-6 py-12 shadow sm:mx-auto sm:w-full sm:max-w-[480px] sm:rounded-lg sm:px-12">
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
+            <Input
+              label="Repeat Password"
+              id="confirmPassword"
+              type="password"
+              {...register('confirmPassword')}
+              error={errors.confirmPassword?.message}
+            />
 
-              <div>
-                {error && <FormError message={error} />}
-                {success && <FormSuccess message={success} />}
-                <Button label="Reset Password" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
-              </div>
-            </form>
-          </div>
+            <div>
+              {error && <FormError message={error} />}
+              {success && <FormSuccess message={success} />}
+              <Button label="Reset Password" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+            </div>
+          </form>
         </div>
       </div>
     </section>
