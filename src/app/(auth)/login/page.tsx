@@ -58,7 +58,7 @@ const Login = () => {
               <div className="flex items-center justify-between">
                 <Checkbox label="Remember me" {...register('rememberMe')} />
                 <div className="text-sm leading-6">
-                  <Link href="/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <Link href="/reset-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Forgot password?
                   </Link>
                 </div>
