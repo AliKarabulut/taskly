@@ -5,6 +5,12 @@ import { getUserByEmail } from '@/libs/user'
 import { getVerificationTokenByToken } from '@/libs/verification-token'
 
 export const newVerification = async (token: string) => {
+  if (!token) {
+    return {
+      error: 'Token is required',
+    }
+  }
+
   const existingToken = await getVerificationTokenByToken(token)
 
   if (!existingToken) {
@@ -35,22 +41,31 @@ export const newVerification = async (token: string) => {
     }
   }
 
-  await client.user.update({
-    where: {
-      id: existingUser.id,
-    },
-    data: {
-      emailVerified: new Date(),
-      email: existingToken.email,
-    },
-  })
+  try {
+    await client.user.update({
+      where: {
+        id: existingUser.id,
+      },
+      data: {
+        emailVerified: new Date(),
+        email: existingToken.email,
+      },
+    })
+  } catch (error) {
+    return {
+      error: 'An error occurred while attempting to verify your email. Please try again.',
+    }
+  }
 
-  await client.verificationToken.delete({
-    where: {
-      id: existingToken.id,
-    },
-  })
-
+  try {
+    await client.verificationToken.delete({
+      where: {
+        id: existingToken.id,
+      },
+    })
+  } catch (error) {
+    console.log('An error occurred while attempting to delete the verification token.')
+  }
   return {
     success: 'Email verified',
   }

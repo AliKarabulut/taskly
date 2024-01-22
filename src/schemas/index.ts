@@ -39,3 +39,20 @@ export const ResetPasswordSchema = z.object({
     message: 'Email is required',
   }),
 })
+
+export const NewPasswordScheme = z
+  .object({
+    password: z
+      .string()
+      .min(8, {
+        message: 'Minimum 8 characters required',
+      })
+      .refine(value => /[a-z]/.test(value) && /[A-Z]/.test(value) && /[0-9]/.test(value), {
+        message: 'Password must contain at least one uppercase letter, one lowercase letter and one digit',
+      }),
+    confirmPassword: z.string(),
+  })
+  .refine(data => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  })

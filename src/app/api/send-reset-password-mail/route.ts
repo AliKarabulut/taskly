@@ -15,7 +15,7 @@ export const POST = async (request: NextRequest) => {
     }
 
     const { email, token } = body
-    const confirmLink = `${process.env.SITE_URL}/reset-password?token=${token}`
+    const confirmLink = `${process.env.SITE_URL}/new-password?token=${token}`
 
     const transporter = nodemailer.createTransport({
       service: 'Gmail',

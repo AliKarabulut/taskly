@@ -37,7 +37,7 @@ export const resetPassword = async (values: z.infer<typeof ResetPasswordSchema>)
   const data = await response.json()
 
   if (response.ok) {
-    return { message: data.message }
+    return { success: data.message }
   } else {
     return { error: data.error }
   }
