@@ -1,27 +1,32 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { cookies } from 'next/headers'
+import { SessionProvider } from 'next-auth/react'
 
 import './globals.css'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
 import { sharedTitle, sharedDescription } from '@/app/shared-metadata'
 import { ThemeProvider } from '@/store/theme-provider'
+import { auth } from '@/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const theme = cookies().get('theme')
+  const session = await auth()
   return (
-    <html lang="en" className={theme?.value ? theme.value : 'light'} suppressHydrationWarning>
-      <ThemeProvider theme={theme?.value ? theme.value : 'light'}>
-        <body className={inter.className}>
-          <Header />
-          {children}
-          <Footer />
-        </body>
-      </ThemeProvider>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en" className={theme?.value ? theme.value : 'light'} suppressHydrationWarning>
+        <ThemeProvider theme={theme?.value ? theme.value : 'light'}>
+          <body className={inter.className}>
+            <Header />
+            {children}
+            <Footer />
+          </body>
+        </ThemeProvider>
+      </html>
+    </SessionProvider>
   )
 }
 

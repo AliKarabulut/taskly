@@ -7,10 +7,6 @@ export const user = [
     name: 'Settings',
     path: '/settings',
   },
-  {
-    name: 'Sign out',
-    path: '/sign-out',
-  },
 ]
 
 export const navigation = [
