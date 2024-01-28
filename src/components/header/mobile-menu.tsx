@@ -1,6 +1,5 @@
 'use client'
 import { usePathname } from 'next/navigation'
-import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Disclosure } from '@headlessui/react'
@@ -9,6 +8,7 @@ import cn from '@/utils/cn'
 import { navigation, user } from '@/constants/header'
 import Notification from '@/components/header/notification'
 import Avatar from '@/components/avatar'
+import { signOut } from '@/actions/sign-out'
 
 type MobileMenuProps = {
   name: string
@@ -18,10 +18,6 @@ type MobileMenuProps = {
 
 const MobileMenu = ({ name, src, email }: MobileMenuProps) => {
   const pathname = usePathname()
-
-  const handleSignOut = () => {
-    signOut()
-  }
 
   return (
     <Disclosure as="nav" className="flex items-center bg-white sm:hidden ">
@@ -73,7 +69,7 @@ const MobileMenu = ({ name, src, email }: MobileMenuProps) => {
                 ))}
 
                 <Disclosure.Button
-                  onClick={() => handleSignOut()}
+                  onClick={() => signOut()}
                   className="block w-full px-5 py-2 text-left text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
                   Sign Out
                 </Disclosure.Button>

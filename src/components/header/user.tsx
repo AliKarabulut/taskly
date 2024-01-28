@@ -1,6 +1,5 @@
 'use client'
 import { Menu, Transition } from '@headlessui/react'
-import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { Fragment } from 'react'
 
@@ -8,6 +7,7 @@ import cn from '@/utils/cn'
 import { user } from '@/constants/header'
 import Notification from '@/components/header/notification'
 import Avatar from '@/components/avatar'
+import { signOut } from '@/actions/sign-out'
 
 type NavigationMenuProps = {
   name: string
@@ -15,9 +15,6 @@ type NavigationMenuProps = {
 }
 
 const NavigationMenu = ({ name, src }: NavigationMenuProps) => {
-  const handleSignOut = () => {
-    signOut()
-  }
   return (
     <div className="hidden gap-x-4 sm:flex sm:items-center">
       <Notification />
@@ -48,7 +45,7 @@ const NavigationMenu = ({ name, src }: NavigationMenuProps) => {
               </Menu.Item>
             ))}
             <Menu.Item>
-              <button onClick={() => handleSignOut()} className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">
+              <button onClick={() => signOut()} className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">
                 Sign Out
               </button>
             </Menu.Item>
