@@ -15,10 +15,10 @@ type NavigationMenuProps = {
 
 const NavigationMenu = ({ name, src }: NavigationMenuProps) => {
   return (
-    <div className="hidden sm:ml-4 sm:flex sm:items-center">
+    <div className="hidden gap-x-4 sm:flex sm:items-center">
       <Notification />
 
-      <Menu as="div" className="relative ml-4 flex-shrink-0">
+      <Menu as="div" className="relative flex-shrink-0">
         <Menu.Button className="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
           <span className="absolute -inset-1.5" />
           <span className="sr-only">Open user menu</span>

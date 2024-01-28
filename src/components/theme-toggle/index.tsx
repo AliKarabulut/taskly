@@ -13,7 +13,7 @@ type ThemeToggleProps = {
 
 type Theme = 'light' | 'dark'
 
-export const ThemeToggle = ({ size = 18, className }: ThemeToggleProps) => {
+export const ThemeToggle = ({ size = 20, className }: ThemeToggleProps) => {
   const { setTheme } = useContext(ThemeContext)
 
   const themeHandler = (theme: Theme) => {
@@ -24,7 +24,10 @@ export const ThemeToggle = ({ size = 18, className }: ThemeToggleProps) => {
   }
 
   return (
-    <button id="dark-mode-toggle" aria-hidden="true" className={cn('flex items-center text-gray-800 dark:text-white', className)}>
+    <button
+      id="dark-mode-toggle"
+      aria-hidden="true"
+      className={cn('flex items-center text-gray-400 hover:text-gray-500  dark:text-white', className)}>
       <SunIcon width={size} height={size} className="hidden text-lg dark:block" onClick={() => themeHandler('light')} />
       <MoonIcon width={size} height={size} className="block text-lg dark:hidden" onClick={() => themeHandler('dark')} />
     </button>

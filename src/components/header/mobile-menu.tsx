@@ -67,9 +67,9 @@ const MobileMenu = ({ name, src, email }: MobileMenuProps) => {
                   </Disclosure.Button>
                 ))}
 
-                <Disclosure.Button className="block w-full px-5 py-2 text-left text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
+                {/* <Disclosure.Button className="block w-full px-5 py-2 text-left text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800">
                   Sign Out
-                </Disclosure.Button>
+                </Disclosure.Button> */}
               </div>
             </div>
           </Disclosure.Panel>

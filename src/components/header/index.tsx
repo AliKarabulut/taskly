@@ -13,7 +13,7 @@ const Header = async () => {
   return (
     <header className="bg-white shadow">
       <div className="container mx-auto px-2 sm:px-8">
-        <div className="flex h-16 justify-between gap-x-6">
+        <div className="flex h-16 justify-between gap-x-3 sm:gap-x-4">
           <div className="flex px-2 sm:px-0">
             <Link href="/" className="flex flex-shrink-0 items-center">
               <Image className="h-8 w-auto" src="/favicon.png" width={29} height={32} alt="Your Company" />
