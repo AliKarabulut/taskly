@@ -1,22 +1,26 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { cookies } from 'next/headers'
 
 import './globals.css'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-
-import { sharedTitle, sharedDescription } from './shared-metadata'
+import { sharedTitle, sharedDescription } from '@/app/shared-metadata'
+import { ThemeProvider } from '@/store/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const theme = cookies().get('theme')
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
-      </body>
+    <html lang="en" className={theme?.value ? theme.value : 'light'} suppressHydrationWarning>
+      <ThemeProvider theme={theme?.value ? theme.value : 'light'}>
+        <body className={inter.className}>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </ThemeProvider>
     </html>
   )
 }
