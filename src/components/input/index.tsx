@@ -5,7 +5,7 @@ type InputProps = {
   label: string
   name: string
   id?: string
-  type?: 'text' | 'email' | 'password'
+  type?: 'text' | 'email' | 'password' | 'number'
   error?: string
   autoComplete?: string
   required?: boolean

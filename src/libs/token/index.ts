@@ -1,8 +1,12 @@
+import crypto from 'crypto'
+
 import { v4 as uuid } from 'uuid'
 
+import { client } from '@/libs/prismadb'
 import { getVerificationTokenByEmail } from '@/libs/verification-token'
 import { getPassordResetTokenByEmail } from '@/libs/password-reset-token'
-import { client } from '@/libs/prismadb'
+
+import { getTwoFactorTokenByEmail } from '../two-factor-token.ts'
 
 export const generateVerificationToken = async (email: string) => {
   try {
@@ -57,6 +61,34 @@ export const generatePasswordResetToken = async (email: string) => {
     })
 
     return passwordResetToken
+  } catch (error) {
+    return null
+  }
+}
+
+export const generateTwoFactorToken = async (email: string) => {
+  try {
+    const token = crypto.randomInt(100000, 1000000).toString()
+    const expires = new Date(new Date().getTime() + 5 * 60 * 1000)
+    const existingToken = await getTwoFactorTokenByEmail(email)
+
+    if (existingToken) {
+      await client.twoFactorToken.delete({
+        where: {
+          id: existingToken.id,
+        },
+      })
+    }
+
+    const twoFactorToken = await client.twoFactorToken.create({
+      data: {
+        email,
+        token,
+        expires,
+      },
+    })
+
+    return twoFactorToken
   } catch (error) {
     return null
   }

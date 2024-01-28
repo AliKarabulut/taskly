@@ -18,6 +18,7 @@ const Login = () => {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>('')
   const [success, setSuccess] = useState<string | null>('')
+  const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false)
   const {
     register,
     handleSubmit,
@@ -27,6 +28,7 @@ const Login = () => {
     defaultValues: {
       email: '',
       password: '',
+      code: '',
       rememberMe: false,
     },
   })
@@ -38,6 +40,8 @@ const Login = () => {
           setError(data.error)
         } else if (data?.success) {
           setSuccess(data.success)
+        } else if (data?.twoFactor) {
+          setShowTwoFactor(true)
         }
       })
     })
@@ -53,20 +57,30 @@ const Login = () => {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-              <Input label="Email address" type="email" {...register('email')} error={errors.email?.message} />
-              <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
-              <div className="flex items-center justify-between">
-                <Checkbox label="Remember me" {...register('rememberMe')} />
-                <div className="text-sm leading-6">
-                  <Link href="/reset-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                    Forgot password?
-                  </Link>
-                </div>
-              </div>
+              {showTwoFactor ? (
+                <Input label="Two Factor Code" type="number" {...register('code')} error={errors.code?.message} />
+              ) : (
+                <>
+                  <Input label="Email address" type="email" {...register('email')} error={errors.email?.message} />
+                  <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
+                  <div className="flex items-center justify-between">
+                    <Checkbox label="Remember me" {...register('rememberMe')} />
+                    <div className="text-sm leading-6">
+                      <Link href="/reset-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                        Forgot password?
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              )}
               <div>
                 {error && <FormError message={error} />}
                 {success && <FormSuccess message={success} />}
-                <Button label="Sign In" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+                <Button
+                  label={showTwoFactor ? 'Confirm' : 'Login'}
+                  disabled={isPending}
+                  className="hover:bg-indigo-500  focus-visible:outline-indigo-600"
+                />
               </div>
             </form>
 
