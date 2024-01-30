@@ -31,7 +31,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('http://localhost:3000/'),
+  metadataBase: new URL(process.env.SITE_URL || 'http://localhost:3000'),
   robots: {
     index: true,
     follow: true,

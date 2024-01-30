@@ -1,6 +1,6 @@
 export const user = [
   {
-    name: 'Your Profile',
+    name: 'Profile',
     path: '/profile',
   },
   {

@@ -54,6 +54,11 @@ export const {
       if (token.role && session.user) {
         session.user.role = token.role as 'ADMIN' | 'USER'
       }
+
+      if (token.isTwoFactorEnabled && session.user) {
+        session.user.isTwoFactorEnabled = token.isTwoFactorEnabled as boolean
+      }
+
       return session
     },
 
@@ -64,7 +69,7 @@ export const {
       if (!user) return token
 
       token.role = user.role
-
+      token.isTwoFactorEnabled = user.isTwoFactorEnabled
       return token
     },
   },
