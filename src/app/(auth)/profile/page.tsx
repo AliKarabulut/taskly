@@ -6,7 +6,7 @@ const SignOut = async () => {
 
   return (
     <section id="profile">
-      <ul className="mx-auto flex max-w-lg flex-col gap-2 rounded-lg border border-gray-100 px-6 py-3 shadow-lg">
+      <ul className="mx-auto flex max-w-lg flex-col gap-2 rounded-lg border border-gray-100 px-8 py-10 shadow">
         {user && Object.entries(user).map(([key, value]) => <UserInformationList key={key} name={key} value={value} />)}
       </ul>
     </section>
