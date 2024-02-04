@@ -9,7 +9,7 @@ export const changeEmail = async (values: z.infer<typeof EmailVerifyScheme>) => 
   const validateValues = EmailVerifyScheme.safeParse(values)
 
   if (!validateValues.success) {
-    return { error: 'Invalid Password!' }
+    return { error: 'Invalid Email!' }
   }
 
   const { email } = validateValues.data
