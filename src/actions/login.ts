@@ -8,7 +8,7 @@ import { signIn } from '@/auth'
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes'
 import { generateTwoFactorToken, generateVerificationToken } from '@/libs/token'
 import { getUserByEmail } from '@/libs/user'
-import { getTwoFactorTokenByEmail } from '@/libs/two-factor-token.ts'
+import { getTwoFactorTokenByEmail } from '@/libs/two-factor-token'
 import { getTwoFactorConfirmationByUserId } from '@/libs/two-factor-confirmation'
 
 export const login = async (values: z.infer<typeof LoginSchema>) => {

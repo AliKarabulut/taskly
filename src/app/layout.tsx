@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { cookies } from 'next/headers'
 import { SessionProvider } from 'next-auth/react'
+import { Toaster } from 'react-hot-toast'
 
 import './globals.css'
 import Header from '@/components/header'
@@ -22,6 +23,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <body className={inter.className}>
             <Header />
             {children}
+            <Toaster position="top-right" />
             <Footer />
           </body>
         </ThemeProvider>

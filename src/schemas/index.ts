@@ -34,7 +34,7 @@ export const RegisterSchema = z
     path: ['confirmPassword'],
   })
 
-export const ResetPasswordSchema = z.object({
+export const EmailVerifyScheme = z.object({
   email: z.string().email({
     message: 'Email is required',
   }),

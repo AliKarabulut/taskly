@@ -19,3 +19,13 @@ export const getUserById = async (id: string) => {
     return null
   }
 }
+
+export const getUserAccounts = async (id: string) => {
+  const accounts = await client.account.findMany({
+    where: {
+      userId: id,
+    },
+  })
+
+  return accounts
+}

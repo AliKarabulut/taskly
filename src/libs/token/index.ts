@@ -5,8 +5,8 @@ import { v4 as uuid } from 'uuid'
 import { client } from '@/libs/prismadb'
 import { getVerificationTokenByEmail } from '@/libs/verification-token'
 import { getPassordResetTokenByEmail } from '@/libs/password-reset-token'
-
-import { getTwoFactorTokenByEmail } from '../two-factor-token.ts'
+import { getTwoFactorTokenByEmail } from '@/libs/two-factor-token/'
+import { getEmailChangeTokenByEmail } from '@/libs/email-change-token'
 
 export const generateVerificationToken = async (email: string) => {
   try {
@@ -61,6 +61,35 @@ export const generatePasswordResetToken = async (email: string) => {
     })
 
     return passwordResetToken
+  } catch (error) {
+    return null
+  }
+}
+
+export const generateEmailChangeToken = async (email: string) => {
+  try {
+    const token = uuid()
+    const expires = new Date(new Date().getTime() + 5 * 60 * 1000)
+
+    const existingToken = await getEmailChangeTokenByEmail(email)
+
+    if (existingToken) {
+      await client.emailChangeToken.delete({
+        where: {
+          id: existingToken.id,
+        },
+      })
+    }
+
+    const emailChangeToken = await client.emailChangeToken.create({
+      data: {
+        email,
+        token,
+        expires,
+      },
+    })
+
+    return emailChangeToken
   } catch (error) {
     return null
   }
