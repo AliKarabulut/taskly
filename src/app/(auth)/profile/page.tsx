@@ -6,6 +6,7 @@ import { changeEmail } from '@/actions/change-email'
 import Button from '@/components/button'
 // import UserInformationList from '@/components/user-information-list'
 import { useCurrentUser } from '@/services/get-user-client'
+import SwitchComponent from '@/components/switch'
 
 const Profile = () => {
   const [isPending, startTransition] = useTransition()
@@ -64,13 +65,16 @@ const Profile = () => {
             </li>
             <li className="flex items-center justify-between gap-6 border-b border-gray-100 py-1.5 ">
               <span className="font-medium first-letter:capitalize dark:text-white">IsTwoFactorEnabled:</span>
-              <span className=" inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700  ring-1 ring-inset ring-purple-700/10 dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30">
-                {user.isTwoFactorEnabled ? 'On' : 'Off'}
-              </span>
+              <div className="flex items-center gap-2">
+                <span className=" inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700  ring-1 ring-inset ring-purple-700/10 dark:bg-purple-400/10 dark:text-purple-400 dark:ring-purple-400/30">
+                  {user.isTwoFactorEnabled ? 'On' : 'Off'}
+                </span>
+                <SwitchComponent />
+              </div>
             </li>
           </>
         ) : (
-          <div>asdasd</div>
+          <div>User Data Not Found</div>
         )}
       </ul>
     </section>
