@@ -1,4 +1,4 @@
-import { TrashIcon } from '@heroicons/react/24/outline'
+import TableBody from '@/components/todo-table/body'
 
 const todo = [
   { name: 'Todo 1', description: 'Description 1', priority: 'High' },
@@ -32,6 +32,9 @@ export default function Example() {
               <table className="min-w-full divide-y divide-gray-300">
                 <thead>
                   <tr>
+                    <th>
+                      <span className="sr-only">isCompleted</span>
+                    </th>
                     <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                       Name
                     </th>
@@ -47,20 +50,8 @@ export default function Example() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
-                  {todo.map(todo => (
-                    <tr key={todo.name}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{todo.name}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{todo.description}</td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{todo.priority}</td>
-                      <td className="relative  whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <div className="flex justify-end gap-3">
-                          <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                            Edit<span className="sr-only">, {todo.name}</span>
-                          </a>
-                          <TrashIcon width={20} className="cursor-pointer transition-all hover:text-red-500" />
-                        </div>
-                      </td>
-                    </tr>
+                  {todo.map((todo, index) => (
+                    <TableBody key={index} todo={todo} />
                   ))}
                 </tbody>
               </table>
