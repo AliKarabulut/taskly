@@ -5,7 +5,7 @@ import { getTodoByUserId } from '@/libs/todo'
 
 const Todo = async () => {
   const user = await getUserInformation()
-  const todo = await getTodoByUserId(user!.id)
+  const todo = await getTodoByUserId(user!.id, 2)
   return (
     <section id="todo">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
