@@ -10,4 +10,8 @@ export const navigation = [
     name: 'Todo',
     path: '/todo',
   },
+  {
+    name: 'New Todo',
+    path: '/new-todo',
+  },
 ]
