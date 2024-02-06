@@ -29,12 +29,20 @@ model User {
   twoFactorConfirmationId String?
 }
 
+enum Priority {
+  low
+  medium
+  high
+}
+
 model Todo {
-  id        Int     @id @default(autoincrement())
-  title     String
-  completed Boolean @default(false)
-  userId    String
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  priority    Priority @default(low)
+  completed   Boolean  @default(false)
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Account {

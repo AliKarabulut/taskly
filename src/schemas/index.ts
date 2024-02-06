@@ -56,3 +56,13 @@ export const NewPasswordScheme = z
     message: 'Passwords do not match',
     path: ['confirmPassword'],
   })
+
+export const TodoSchema = z.object({
+  name: z.string().min(1, {
+    message: 'Title is required',
+  }),
+  description: z.string().min(1, {
+    message: 'Description is required',
+  }),
+  priority: z.enum(['low', 'medium', 'high']),
+})
