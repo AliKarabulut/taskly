@@ -22,6 +22,7 @@ const NewTodo = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<z.infer<typeof TodoSchema>>({
     resolver: zodResolver(TodoSchema),
     defaultValues: {
@@ -32,6 +33,8 @@ const NewTodo = () => {
   })
 
   const onSubmit = (values: z.infer<typeof TodoSchema>) => {
+    setError('')
+    setSuccess('')
     startTransition(() => {
       newTodo(values, user!.id).then(data => {
         if (data?.error) {
@@ -47,7 +50,7 @@ const NewTodo = () => {
     <section>
       <div className="flex min-h-full flex-1 flex-col items-center justify-center sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+          <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Create new todo</h2>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
@@ -55,10 +58,20 @@ const NewTodo = () => {
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <Input label="Name" {...register('title')} error={errors.title?.message} />
               <Input label="Description" {...register('description')} error={errors.description?.message} />
-              <Select label="Priority" {...register('priority')} error={errors.priority?.message} />
+              <Select label="Priority" name="priority" setValue={setValue} error={errors.priority?.message} />
               <div>
                 {error && <FormError message={error} />}
-                {success && <FormSuccess message={success} />}
+                {success && (
+                  <>
+                    <FormSuccess message={success} />
+                    <Button
+                      label="Back to Todos"
+                      href="/todo"
+                      disabled={isPending}
+                      className="mb-1.5  hover:bg-indigo-500 focus-visible:outline-indigo-600"
+                    />
+                  </>
+                )}
                 <Button label="Create New Todo" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
               </div>
             </form>
