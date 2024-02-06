@@ -58,11 +58,21 @@ export const NewPasswordScheme = z
   })
 
 export const TodoSchema = z.object({
-  title: z.string().min(1, {
-    message: 'Title is required',
-  }),
-  description: z.string().min(1, {
-    message: 'Description is required',
-  }),
+  title: z
+    .string()
+    .min(1, {
+      message: 'Title is required',
+    })
+    .max(200, {
+      message: 'Title cannot exceed 200 characters',
+    }),
+  description: z
+    .string()
+    .min(1, {
+      message: 'Description is required',
+    })
+    .max(500, {
+      message: 'Description cannot exceed 500 characters',
+    }),
   priority: z.enum(['low', 'medium', 'high']),
 })
