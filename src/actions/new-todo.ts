@@ -6,6 +6,10 @@ import { getUserById } from '@/libs/user'
 import { client } from '@/libs/prismadb'
 
 export const newTodo = async (values: z.infer<typeof TodoSchema>, userId: string) => {
+  if (!userId) {
+    return { error: 'User not found' }
+  }
+
   const validateValues = TodoSchema.safeParse(values)
 
   if (!validateValues.success) {
