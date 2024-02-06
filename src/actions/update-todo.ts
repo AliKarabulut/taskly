@@ -26,7 +26,7 @@ export const updateTodo = async (values: z.infer<typeof TodoSchema>, todoId: str
         id: todoId,
       },
       data: {
-        name: values.name,
+        title: values.title,
         description: values.description,
         priority: values.priority,
       },

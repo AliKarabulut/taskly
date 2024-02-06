@@ -37,7 +37,7 @@ enum Priority {
 
 model Todo {
   id          String   @id @default(cuid())
-  name        String
+  title       String
   description String
   priority    Priority @default(low)
   completed   Boolean  @default(false)

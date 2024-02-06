@@ -27,7 +27,7 @@ export const newTodo = async (values: z.infer<typeof TodoSchema>, userId: string
   try {
     await client.todo.create({
       data: {
-        name: values.name,
+        title: values.title,
         description: values.description,
         priority: values.priority,
         userId: existingUser.id,

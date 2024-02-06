@@ -58,7 +58,7 @@ export const NewPasswordScheme = z
   })
 
 export const TodoSchema = z.object({
-  name: z.string().min(1, {
+  title: z.string().min(1, {
     message: 'Title is required',
   }),
   description: z.string().min(1, {

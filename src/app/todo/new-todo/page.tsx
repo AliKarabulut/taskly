@@ -11,6 +11,7 @@ import FormError from '@/components/form-error'
 import FormSuccess from '@/components/form-success'
 import { newTodo } from '@/actions/new-todo'
 import { useCurrentUser } from '@/services/get-user-client'
+import Select from '@/components/select'
 
 const NewTodo = () => {
   const [isPending, startTransition] = useTransition()
@@ -24,7 +25,7 @@ const NewTodo = () => {
   } = useForm<z.infer<typeof TodoSchema>>({
     resolver: zodResolver(TodoSchema),
     defaultValues: {
-      name: '',
+      title: '',
       description: '',
       priority: 'low',
     },
@@ -52,9 +53,9 @@ const NewTodo = () => {
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-              <Input label="Name" {...register('name')} error={errors.name?.message} />
+              <Input label="Name" {...register('title')} error={errors.title?.message} />
               <Input label="Description" {...register('description')} error={errors.description?.message} />
-              <Input label="Priority" {...register('priority')} error={errors.priority?.message} />
+              <Select label="Priority" {...register('priority')} error={errors.priority?.message} />
               <div>
                 {error && <FormError message={error} />}
                 {success && <FormSuccess message={success} />}
