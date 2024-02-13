@@ -49,7 +49,7 @@ const LoginForm = () => {
     })
   }
   return (
-    <FormContainer title="Sign in to your account">
+    <FormContainer title="Sign In To Your Account">
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         {showTwoFactor ? (
           <Input label="Two Factor Code" type="number" {...register('code')} error={errors.code?.message} />
