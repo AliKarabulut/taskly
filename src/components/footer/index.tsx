@@ -22,7 +22,7 @@ const navigation = [
 
 const Footer = () => {
   return (
-    <footer className="mt-auto bg-white">
+    <footer className="order-last bg-white">
       <div className="container mx-auto px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex justify-center space-x-6 md:order-2">
           {navigation.map(item => (

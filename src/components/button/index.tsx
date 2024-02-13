@@ -20,7 +20,7 @@ const Button = ({ href, label, type = 'submit', onClick, className, children, di
   )
 
   return href ? (
-    <Link href={href} className={buttonClass}>
+    <Link href={href} className={buttonClass} {...props}>
       {children}
       {label}
     </Link>
