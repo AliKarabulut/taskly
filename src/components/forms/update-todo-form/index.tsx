@@ -74,7 +74,7 @@ const UpdateTodoForm = ({ existingTodo }: UpdateTodoFormProps) => {
               />
             </>
           )}
-          <Button label="Create New Todo" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+          <Button label="Update Todo" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
         </div>
       </form>
     </FormContainer>

@@ -3,6 +3,8 @@ import TableBody from '@/components/table-body'
 import TableHead from '@/components/table-head'
 import { getTodoByUserId } from '@/libs/todo'
 
+export const dynamic = 'force-dynamic'
+
 const Todo = async () => {
   const user = await getUserInformation()
   const todo = await getTodoByUserId(user!.id, 2)

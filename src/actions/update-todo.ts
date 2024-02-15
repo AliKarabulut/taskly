@@ -39,9 +39,9 @@ export const updateTodo = async (values: z.infer<typeof TodoSchema>, todoId: str
         priority: values.priority,
       },
     })
+
+    return { success: 'Todo updated successfully' }
   } catch (error) {
     return { error: 'An error occurred while updating the todo. Please try again.' }
   }
-
-  return { success: 'Todo updated successfully' }
 }
