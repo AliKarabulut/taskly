@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 
 const Todo = async () => {
   const user = await getUserInformation()
-  const todo = await getTodoByUserId(user!.id, 2)
+  const todo = await getTodoByUserId(user!.id, 0)
   return (
     <section id="todo">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,7 +24,7 @@ const Todo = async () => {
             </button>
           </div>
         </div>
-        <table className="inline-block min-w-full divide-y divide-gray-300 overflow-x-auto py-2 align-middle">
+        <table className="min-w-full divide-y divide-gray-300 overflow-x-auto py-2 align-middle">
           <TableHead />
           <tbody className="divide-y divide-gray-200">{todo && todo.map(todo => <TableBody key={todo.id} todo={todo} />)}</tbody>
         </table>

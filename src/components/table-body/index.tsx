@@ -1,21 +1,42 @@
+'use client'
 import Link from 'next/link'
 import { TrashIcon } from '@heroicons/react/24/outline'
+import toast from 'react-hot-toast'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
+import { deleteTodo } from '@/actions/delete-todo'
 import Checkbox from '@/components/checkbox'
+import cn from '@/utils/cn'
 
 type TableBodyProps = {
   todo: {
     title: string
     description: string
     priority: string
-    id?: string
-    userId?: string
+    id: string
+    userId: string
   }
 }
 
 const TableBody = ({ todo }: TableBodyProps) => {
-  // const deleteTodo = async (id: string) => {
-
+  const [pending, setPending] = useState<boolean>(false)
+  const router = useRouter()
+  const deleteHandler = async (id: string) => {
+    setPending(true)
+    toast.promise(deleteTodo(id), {
+      loading: 'Deleting todo...',
+      success: (data: { success: string }) => {
+        setPending(false)
+        router.refresh()
+        return data.success
+      },
+      error: (err: Error) => {
+        setPending(false)
+        return err.message
+      },
+    })
+  }
   return (
     <tr className="grid grid-cols-12">
       <td className="col-span-1">
@@ -30,7 +51,14 @@ const TableBody = ({ todo }: TableBodyProps) => {
         </Link>
       </td>
       <td className="col-span-1">
-        <TrashIcon width={20} className="cursor-pointer transition-all hover:text-red-500" />
+        <button type="button" onClick={() => deleteHandler(todo.id)} disabled={pending}>
+          <TrashIcon
+            width={20}
+            className={cn('cursor-pointer transition-all hover:text-red-500', {
+              'text-gray-400 hover:text-gray-400': pending,
+            })}
+          />
+        </button>
       </td>
     </tr>
   )
