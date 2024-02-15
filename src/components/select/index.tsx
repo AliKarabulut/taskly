@@ -15,18 +15,20 @@ type SelectProps = {
   name: string
   error?: string
   label: string
-  value?: string
+  value?: 'low' | 'medium' | 'high'
   setValue: UseFormSetValue<FormValues>
 }
 
-type PriorityProps = {
+export type PriorityProps = {
   name: 'low' | 'medium' | 'hight'
 }
 
 const priority = [{ name: 'low' }, { name: 'medium' }, { name: 'high' }]
 
-const Select = ({ error, label, name, setValue }: SelectProps) => {
-  const [selected, setSelected] = useState<PriorityProps>(priority[0] as PriorityProps)
+const Select = ({ error, label, name, setValue, value }: SelectProps) => {
+  const [selected, setSelected] = useState<PriorityProps | undefined>(
+    value ? (priority.find(e => e.name === value) as PriorityProps) : (priority[0] as PriorityProps),
+  )
 
   const handleOnChange = (value: PriorityProps) => {
     setSelected(value)
@@ -40,8 +42,8 @@ const Select = ({ error, label, name, setValue }: SelectProps) => {
           <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
             {label}
           </label>
-          <Listbox.Button className="relative block w-full cursor-default rounded-md border-0 bg-white px-4 py-1.5  text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm sm:leading-6">
-            <span className="block truncate first-letter:capitalize">{selected.name}</span>
+          <Listbox.Button className="relative block w-full cursor-default rounded-md border-0 bg-white px-4 py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm sm:leading-6">
+            <span className="block truncate first-letter:capitalize">{selected?.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
             </span>

@@ -4,9 +4,11 @@ import { z } from 'zod'
 import { TodoSchema } from '@/schemas'
 import { client } from '@/libs/prismadb'
 import { getTodoById } from '@/libs/todo'
+import getUserInformation from '@/actions/get-user-information'
 
 export const updateTodo = async (values: z.infer<typeof TodoSchema>, todoId: string) => {
   const validateValues = TodoSchema.safeParse(values)
+  const user = await getUserInformation()
 
   if (!validateValues.success) {
     return { error: 'Invalid Value' }
@@ -15,6 +17,12 @@ export const updateTodo = async (values: z.infer<typeof TodoSchema>, todoId: str
   const existingTodo = await getTodoById(todoId)
 
   if (!existingTodo) {
+    return {
+      error: "Todo doesn't exist",
+    }
+  }
+
+  if (existingTodo?.userId !== user?.id) {
     return {
       error: "Todo doesn't exist",
     }

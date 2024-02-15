@@ -24,7 +24,7 @@ const Todo = async () => {
         </div>
         <table className="inline-block min-w-full divide-y divide-gray-300 overflow-x-auto py-2 align-middle">
           <TableHead />
-          <tbody className="divide-y divide-gray-200">{todo && todo.map((todo, index) => <TableBody key={index} todo={todo} />)}</tbody>
+          <tbody className="divide-y divide-gray-200">{todo && todo.map(todo => <TableBody key={todo.id} todo={todo} />)}</tbody>
         </table>
       </div>
     </section>
