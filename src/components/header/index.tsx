@@ -11,7 +11,7 @@ const Header = async () => {
   const user = await getUserInformation()
 
   return (
-    <header className="bg-white shadow">
+    <header className="bg-white shadow dark:bg-darkModeNeutral-900">
       <div className="container mx-auto px-2 sm:px-8">
         <div className="flex h-16 justify-between gap-x-3 sm:gap-x-4">
           <div className="flex px-2 sm:px-0">

@@ -24,11 +24,13 @@ export const ThemeToggle = ({ size = 20, className }: ThemeToggleProps) => {
   }
 
   return (
-    <button
-      id="dark-mode-toggle"
-      aria-hidden="true"
-      className={cn('flex items-center text-gray-400 hover:text-gray-500  dark:text-white', className)}>
-      <SunIcon width={size} height={size} className="hidden text-lg dark:block" onClick={() => themeHandler('light')} />
+    <button id="dark-mode-toggle" aria-hidden="true" className={cn('flex items-center text-gray-400 hover:text-gray-500', className)}>
+      <SunIcon
+        width={size}
+        height={size}
+        className="hidden text-lg dark:block dark:text-darkModeNeutral-50"
+        onClick={() => themeHandler('light')}
+      />
       <MoonIcon width={size} height={size} className="block text-lg dark:hidden" onClick={() => themeHandler('dark')} />
     </button>
   )

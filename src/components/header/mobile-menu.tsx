@@ -52,7 +52,6 @@ const MobileMenu = ({ name, src, email }: MobileMenuProps) => {
                   <div className="text-base font-medium text-gray-800">{name}</div>
                   <div className="text-sm font-medium text-gray-500">{email}</div>
                 </div>
-                <Notification />
               </div>
               <div className="mt-3 space-y-1">
                 {user.map(item => (

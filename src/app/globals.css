@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply flex min-h-screen flex-col justify-between;
+  @apply dark:bg-darkModeNeutral-800 flex min-h-screen flex-col justify-between;
 }
 
 section {

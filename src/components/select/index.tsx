@@ -55,12 +55,14 @@ const Select = ({ error, label, name, setValue, value }: SelectProps) => {
           )}
         </div>
         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="dark:tbgext-darkModeNeutral-100 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
             {priority.map((item, itemIdx) => (
               <Listbox.Option
                 key={itemIdx}
                 className={({ active }) =>
-                  `relative cursor-default select-none px-4 py-2 ${active ? 'bg-blue-500 text-white' : 'text-gray-900'}`
+                  `relative cursor-default select-none px-4 py-2 ${
+                    active ? 'bg-blue-500 text-white dark:bg-darkModeNeutral-200 dark:text-darkModeNeutral-50' : 'text-gray-900'
+                  }`
                 }
                 value={item}>
                 {({ selected }) => (

@@ -38,15 +38,21 @@ const TableBody = ({ todo }: TableBodyProps) => {
     })
   }
   return (
-    <tr className="grid grid-cols-12">
+    <tr className=" grid grid-cols-12">
       <td className="col-span-1">
         <Checkbox name={todo.title} label={todo.title} srOnly />
       </td>
-      <td className="col-span-3 truncate text-pretty break-words py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{todo.title}</td>
-      <td className="col-span-5 truncate text-pretty break-words px-3 py-4 text-sm text-gray-500">{todo.description}</td>
-      <td className="col-span-1 px-3 py-4 text-sm text-gray-500 first-letter:capitalize">{todo.priority}</td>
+      <td className="col-span-3 truncate text-pretty break-words py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-darkModeNeutral-100 sm:pl-0">
+        {todo.title}
+      </td>
+      <td className="col-span-5 truncate text-pretty break-words px-3 py-4 text-sm text-gray-500 dark:text-darkModeNeutral-50">
+        {todo.description}
+      </td>
+      <td className="col-span-1 px-3 py-4 text-sm text-gray-500 first-letter:capitalize dark:text-darkModeNeutral-50">{todo.priority}</td>
       <td className="relative col-span-1 py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
-        <Link href={`/update-todo?id=${todo.id}`} className="text-indigo-600 hover:text-indigo-900">
+        <Link
+          href={`/update-todo?id=${todo.id}`}
+          className="text-indigo-600 hover:text-indigo-900 dark:text-darkModeNeutral-100 dark:hover:text-darkModeNeutral-200">
           Edit<span className="sr-only">, {todo.title}</span>
         </Link>
       </td>
@@ -54,9 +60,12 @@ const TableBody = ({ todo }: TableBodyProps) => {
         <button type="button" onClick={() => deleteHandler(todo.id)} disabled={pending}>
           <TrashIcon
             width={20}
-            className={cn('cursor-pointer transition-all hover:text-red-500', {
-              'text-gray-400 hover:text-gray-400': pending,
-            })}
+            className={cn(
+              'cursor-pointer transition-all hover:text-red-500 dark:text-darkModeNeutral-100 dark:hover:text-darkModeNeutral-50',
+              {
+                'text-gray-400 hover:text-gray-400': pending,
+              },
+            )}
           />
         </button>
       </td>

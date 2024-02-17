@@ -16,7 +16,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ name, label, srO
         type="checkbox"
         ref={ref}
         {...props}
-        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600 dark:border-darkModeNeutral-50 dark:bg-darkModeNeutral-100 dark:text-darkModeNeutral-50 dark:ring-0 dark:focus:ring-neutral-300"
       />
       <label htmlFor={name} className={`ml-3 block text-sm leading-6 text-gray-900 ${srOnly ? 'sr-only' : ''}`}>
         {label}
