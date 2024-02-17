@@ -59,11 +59,7 @@ const LoginForm = () => {
             <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
             <div className="flex items-center justify-between">
               <Checkbox label="Remember me" {...register('rememberMe')} />
-              <div className="text-sm leading-6">
-                <Link href="/reset-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                  Forgot password?
-                </Link>
-              </div>
+              <Button href="/reset-password" label="Forgot password" variant="ghost" className="w-fit leading-6" />
             </div>
           </>
         )}

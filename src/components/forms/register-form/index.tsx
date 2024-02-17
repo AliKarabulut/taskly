@@ -60,9 +60,7 @@ const RegisterForm = () => {
         />
         <div className="flex items-center justify-between">
           <div className="text-sm leading-6">
-            <Link href="/login" className="font-semibold text-indigo-600 hover:text-indigo-500">
-              Do you have an account? &nbsp;
-            </Link>
+            <Button href="/login" label="Do you have an account? &nbsp;" variant="ghost" className="w-fit leading-6" />
           </div>
         </div>
         <div>

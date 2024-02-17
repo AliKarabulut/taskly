@@ -6,6 +6,7 @@ import MobileMenu from '@/components/header/mobile-menu'
 import Navigation from '@/components/header/navigation'
 import ThemeToggle from '@/components/theme-toggle'
 import getUserInformation from '@/actions/get-user-information'
+import Button from '@/components/button'
 
 const Header = async () => {
   const user = await getUserInformation()
@@ -22,15 +23,9 @@ const Header = async () => {
           </div>
           <ThemeToggle className="ml-auto" />
           {!user && (
-            <div className="mr-2 flex items-center justify-end gap-x-6">
-              <Link href="/login" className="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900">
-                Log in
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                Sign up
-              </Link>
+            <div className="mr-2 flex items-center justify-end gap-x-4">
+              <Button href="/login" label="Log in" variant="ghost"></Button>
+              <Button href="/register" label="Sign up" className="whitespace-nowrap"></Button>
             </div>
           )}
           {user && (

@@ -6,16 +6,21 @@ type ButtonProps = {
   href?: string
   label: string
   type?: 'button' | 'submit'
+  variant?: 'primary' | 'ghost'
   onClick?: () => void
   className?: string
   children?: React.ReactNode
   disabled?: boolean
 }
 
-const Button = ({ href, label, type = 'submit', onClick, className, children, disabled, ...props }: ButtonProps) => {
+const Button = ({ href, label, type = 'submit', onClick, className, children, disabled, variant = 'primary', ...props }: ButtonProps) => {
   const buttonClass = cn(
-    'flex w-full justify-center transition-all gap-3 rounded-md bg-indigo-600 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
-    { 'opacity-50': disabled },
+    'flex w-full justify-center transition-all gap-3 rounded-md dark:text-darkModeNeutral-50 px-3 py-1.5 text-sm font-semibold leading-6 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+    {
+      'opacity-50': disabled,
+      ' bg-indigo-600 dark:bg-darkModeNeutral-600 shadow-sm': variant === 'primary',
+      'text-indigo-600 hover:text-indigo-500': variant === 'ghost',
+    },
     className,
   )
 

@@ -42,7 +42,7 @@ const Select = ({ error, label, name, setValue, value }: SelectProps) => {
           <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
             {label}
           </label>
-          <Listbox.Button className="relative block w-full cursor-default rounded-md border-0 bg-white px-4 py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm sm:leading-6">
+          <Listbox.Button className="relative block w-full cursor-default rounded-md border-0 bg-white px-4 py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 dark:bg-darkModeNeutral-200 sm:text-sm sm:leading-6">
             <span className="block truncate first-letter:capitalize">{selected?.name}</span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -55,7 +55,7 @@ const Select = ({ error, label, name, setValue, value }: SelectProps) => {
           )}
         </div>
         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-          <Listbox.Options className="dark:tbgext-darkModeNeutral-100 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="dark:tbgext-darkModeNeutral-100 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-darkModeNeutral-100 sm:text-sm">
             {priority.map((item, itemIdx) => (
               <Listbox.Option
                 key={itemIdx}
