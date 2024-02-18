@@ -4,6 +4,7 @@ import { z } from 'zod'
 import { EmailVerifyScheme } from '@/schemas'
 import { client } from '@/libs/prismadb'
 import { getEmailChangeTokenByToken } from '@/libs/email-change-token'
+import { getUserByEmail } from '@/libs/user'
 
 export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: string | null) => {
   if (!token) {
@@ -15,10 +16,17 @@ export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: 
   const validateValues = EmailVerifyScheme.safeParse(value)
 
   if (!validateValues.success) {
-    return { error: 'Invalid Email!' }
+    return { error: 'Invalid credentials!' }
   }
 
   const { email } = validateValues.data
+  const existingUser = await getUserByEmail(email)
+
+  if (existingUser) {
+    return {
+      error: 'Email already exists',
+    }
+  }
 
   const existingToken = await getEmailChangeTokenByToken(token)
 
@@ -49,6 +57,7 @@ export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: 
       },
       data: {
         email,
+        emailVerified: null,
       },
     })
   } catch (error) {
@@ -64,5 +73,5 @@ export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: 
   } catch (error) {
     console.log('An error occurred while attempting to delete the email replacement token')
   }
-  return { success: 'Email replacement successfully' }
+  return { success: 'Email replacement successfully. Signing out' }
 }

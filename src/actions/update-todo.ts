@@ -10,6 +10,10 @@ export const updateTodo = async (values: z.infer<typeof TodoSchema>, todoId: str
   const validateValues = TodoSchema.safeParse(values)
   const user = await getUserInformation()
 
+  if (!user) {
+    return { error: 'User not found' }
+  }
+
   if (!validateValues.success) {
     return { error: 'Invalid Value' }
   }

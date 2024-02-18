@@ -21,7 +21,7 @@ export const getUserById = async (id: string) => {
 }
 
 export const getUserAccounts = async (id: string) => {
-  const accounts = await client.account.findMany({
+  const accounts = await client.account.findFirst({
     where: {
       userId: id,
     },

@@ -29,6 +29,8 @@ const ResetPasswordForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof EmailVerifyScheme>) => {
+    setError('')
+    setSuccess('')
     startTransition(() => {
       resetPassword(values).then(data => {
         if (data?.error) {

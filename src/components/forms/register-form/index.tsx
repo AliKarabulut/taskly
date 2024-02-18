@@ -35,6 +35,8 @@ const RegisterForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    setError('')
+    setSuccess('')
     startTransition(() => {
       registerAction(values).then(data => {
         if (data?.error) {

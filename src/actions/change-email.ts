@@ -1,12 +1,12 @@
 'use server'
 import { z } from 'zod'
 
-import { EmailVerifyScheme } from '@/schemas'
+import { EmailSchema } from '@/schemas'
 import { getUserAccounts, getUserByEmail } from '@/libs/user'
 import { generateEmailChangeToken } from '@/libs/token'
 
-export const changeEmail = async (values: z.infer<typeof EmailVerifyScheme>) => {
-  const validateValues = EmailVerifyScheme.safeParse(values)
+export const changeEmail = async (values: z.infer<typeof EmailSchema>) => {
+  const validateValues = EmailSchema.safeParse(values)
 
   if (!validateValues.success) {
     return { error: 'Invalid Email!' }
@@ -24,7 +24,7 @@ export const changeEmail = async (values: z.infer<typeof EmailVerifyScheme>) => 
 
   const isAccountHasProvider = await getUserAccounts(existingUser.id)
 
-  if (isAccountHasProvider.length > 0) {
+  if (isAccountHasProvider) {
     return {
       error: 'User have a provider account',
     }

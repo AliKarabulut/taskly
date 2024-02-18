@@ -45,7 +45,7 @@ const NewVerification = () => {
         {error && <FormError message={error} />}
         {success && <FormSuccess message={success} />}
       </div>
-      <Button label="Back to login" href="/login" className="mt-2 w-fit sm:mt-4" />
+      <Button label="Back to login" href="/login" className="mt-2 sm:mt-4" />
     </FormContainer>
   )
 }
