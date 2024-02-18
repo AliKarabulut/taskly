@@ -3,7 +3,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter'
 
 import { client } from '@/libs/prismadb'
 import authConfig from '@/auth.config'
-import { getUserById } from '@/libs/user'
+import { getUserAccounts, getUserById } from '@/libs/user'
 import { getTwoFactorConfirmationByUserId } from '@/libs/two-factor-confirmation'
 
 export const {
@@ -68,6 +68,11 @@ export const {
 
       if (!user) return token
 
+      const existingAccount = await getUserAccounts(user.id)
+
+      token.isOAuth = !!existingAccount
+      token.name = user.name
+      token.email = user.email
       token.role = user.role
       token.isTwoFactorEnabled = user.isTwoFactorEnabled
       return token

@@ -47,8 +47,16 @@ const Profile = () => {
                 <span className="inline-flex items-center truncate rounded-md bg-purple-50 px-2 py-1 text-xs font-medium  text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50 dark:ring-purple-400/30">
                   {user.email}
                 </span>
-                <Button label="Edit" disabled={isPending} className="w-fit" onClick={() => emailChangeHandler(user?.email ?? '')}></Button>
+                <Button
+                  label="Change Email"
+                  disabled={isPending}
+                  className="w-fit"
+                  onClick={() => emailChangeHandler(user?.email ?? '')}></Button>
               </div>
+            </li>
+            <li className="flex items-center justify-between gap-6 border-b border-gray-100 py-1.5 ">
+              <span className="font-medium first-letter:capitalize ">Password:</span>
+              <Button href="/change-password" label="Change Password" disabled={isPending} className="w-fit" />
             </li>
             <li className="flex items-center justify-between gap-6 border-b border-gray-100 py-1.5 ">
               <span className="font-medium first-letter:capitalize ">Image:</span>

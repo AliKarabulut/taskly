@@ -2,20 +2,13 @@
 import { z } from 'zod'
 import bcrypt from 'bcryptjs'
 
-import { NewPasswordScheme } from '@/schemas'
+import { ChangePasswordScheme } from '@/schemas'
 import { getUserById } from '@/libs/user'
 import { client } from '@/libs/prismadb'
+import getUserInformation from '@/actions/get-user-information'
 
-export const changePassword = async (values: z.infer<typeof NewPasswordScheme>, oldPassword: string | null, id: string | null) => {
-  if (!oldPassword) {
-    return { error: 'Old password is required' }
-  }
-
-  if (!id) {
-    return { error: 'User id is required' }
-  }
-
-  const validateValues = NewPasswordScheme.safeParse(values)
+export const changePassword = async (values: z.infer<typeof ChangePasswordScheme>) => {
+  const validateValues = ChangePasswordScheme.safeParse(values)
 
   if (!validateValues.success) {
     return { error: 'Invalid Password!' }
@@ -23,7 +16,15 @@ export const changePassword = async (values: z.infer<typeof NewPasswordScheme>, 
 
   const { password } = validateValues.data
 
-  const existingUser = await getUserById(id)
+  const user = await getUserInformation()
+
+  if (!user) {
+    return {
+      error: "User doesn't exist",
+    }
+  }
+
+  const existingUser = await getUserById(user.id)
 
   if (!existingUser) {
     return {
@@ -36,11 +37,17 @@ export const changePassword = async (values: z.infer<typeof NewPasswordScheme>, 
       error: 'User has no password',
     }
   }
-  const isPasswordValid = await bcrypt.compare(oldPassword, existingUser.password)
+  const isPasswordValid = await bcrypt.compare(values.oldPassword, existingUser.password)
 
   if (!isPasswordValid) {
     return {
       error: 'Old password is incorrect',
+    }
+  }
+
+  if (values.oldPassword === password) {
+    return {
+      error: 'New password cannot be the same as the old password',
     }
   }
 
@@ -56,7 +63,7 @@ export const changePassword = async (values: z.infer<typeof NewPasswordScheme>, 
       },
     })
   } catch (error) {
-    return new Error('An error occurred while changing the password. Please try again.')
+    return { error: 'An error occurred while attempting to change the password. Please try again.' }
   }
 
   return { success: 'Password changed successfully' }
