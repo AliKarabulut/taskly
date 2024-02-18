@@ -24,7 +24,7 @@ const Header = async () => {
           <ThemeToggle className="ml-auto" />
           {!user && (
             <div className="mr-2 flex items-center justify-end gap-x-4">
-              <Button href="/login" label="Log in" variant="ghost"></Button>
+              <Button href="/login" label="Log in" variant="ghost" className="text-gray-500"></Button>
               <Button href="/register" label="Sign up" className="whitespace-nowrap"></Button>
             </div>
           )}
