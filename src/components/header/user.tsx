@@ -30,14 +30,14 @@ const NavigationMenu = ({ name, src }: NavigationMenuProps) => {
           leave="transition ease-in duration-75"
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95">
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50">
+          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50">
             {user.map(item => (
               <Menu.Item key={item.name}>
                 {({ active }) => (
                   <Link
                     href={item.path}
                     className={cn(
-                      active ? 'bg-gray-100 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50' : '',
+                      active ? 'bg-gray-100 dark:bg-darkModeNeutral-300 dark:text-darkModeNeutral-50' : '',
                       'block px-4 py-2 text-sm text-gray-700',
                     )}>
                     {item.name}
@@ -48,7 +48,7 @@ const NavigationMenu = ({ name, src }: NavigationMenuProps) => {
             <Menu.Item>
               <button
                 onClick={() => signOut()}
-                className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:bg-darkModeNeutral-600 dark:hover:text-darkModeNeutral-50">
+                className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:bg-darkModeNeutral-600 dark:hover:bg-darkModeNeutral-300 dark:hover:text-darkModeNeutral-50">
                 Sign Out
               </button>
             </Menu.Item>

@@ -1,9 +1,9 @@
-type ExclamationProps = {
+type ExclamationIconProps = {
   className?: string
   size?: number
 }
 
-const Exclamation = ({ className, size = 24 }: ExclamationProps) => {
+const ExclamationIcon = ({ className, size = 24 }: ExclamationIconProps) => {
   return (
     <svg
       className={className}
@@ -24,4 +24,4 @@ const Exclamation = ({ className, size = 24 }: ExclamationProps) => {
   )
 }
 
-export default Exclamation
+export default ExclamationIcon

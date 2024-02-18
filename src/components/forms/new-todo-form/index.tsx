@@ -66,7 +66,7 @@ const NewTodoForm = () => {
               />
             </>
           )}
-          <Button label="Create New Todo" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+          <Button label="Create New Todo" disabled={isPending} />
         </div>
       </form>
     </FormContainer>

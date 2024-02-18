@@ -1,9 +1,9 @@
-type CheckProps = {
+type CheckIconProps = {
   className?: string
   size?: number
 }
 
-const Check = ({ className, size = 24 }: CheckProps) => {
+const CheckIcon = ({ className, size = 24 }: CheckIconProps) => {
   return (
     <svg
       className={className}
@@ -23,4 +23,4 @@ const Check = ({ className, size = 24 }: CheckProps) => {
   )
 }
 
-export default Check
+export default CheckIcon

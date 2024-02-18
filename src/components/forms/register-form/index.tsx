@@ -66,7 +66,7 @@ const RegisterForm = () => {
         <div>
           {error && <FormError message={error} />}
           {success && <FormSuccess message={success} />}
-          <Button label="Register" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+          <Button label="Register" disabled={isPending} />
         </div>
       </form>
       <Seperator text="Or continue with" />

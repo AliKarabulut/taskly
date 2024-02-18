@@ -52,7 +52,7 @@ const NewEmailForm = () => {
         <div>
           {error && <FormError message={error} />}
           {success && <FormSuccess message={success} />}
-          <Button label="Change Email" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+          <Button label="Change Email" disabled={isPending} />
         </div>
       </form>
     </FormContainer>

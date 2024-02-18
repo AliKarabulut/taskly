@@ -60,7 +60,7 @@ const NewPasswordForm = () => {
         <div>
           {error && <FormError message={error} />}
           {success && <FormSuccess message={success} />}
-          <Button label="Reset Password" disabled={isPending} className="hover:bg-indigo-500  focus-visible:outline-indigo-600" />
+          <Button label="Reset Password" disabled={isPending} />
         </div>
       </form>
     </FormContainer>
