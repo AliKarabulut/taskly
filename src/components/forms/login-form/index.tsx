@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
-import Link from 'next/link'
 
 import { LoginSchema } from '@/schemas'
 import Button from '@/components/button'
@@ -66,11 +65,7 @@ const LoginForm = () => {
         <div>
           {error && <FormError message={error} />}
           {success && <FormSuccess message={success} />}
-          <Button
-            label={showTwoFactor ? 'Confirm' : 'Login'}
-            disabled={isPending}
-            className="hover:bg-indigo-500  focus-visible:outline-indigo-600"
-          />
+          <Button label={showTwoFactor ? 'Confirm' : 'Log in'} disabled={isPending} />
         </div>
       </form>
       <Seperator text="Or continue with" />

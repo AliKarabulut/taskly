@@ -1,4 +1,5 @@
 import { signIn } from 'next-auth/react'
+
 import Button from '@/components/button'
 import GitHubIcon from '@/components/icons/github'
 import GoogleIcon from '@/components/icons/google'
@@ -27,7 +28,7 @@ const LoginProvider = ({ isPending }: LoginProviderProps) => {
       <Button
         label="GitHub"
         disabled={isPending}
-        className="bg-[#24292F] focus-visible:outline-[#24292F]"
+        className="bg-[#24292F] hover:bg-[#1b1f24] focus-visible:outline-[#24292F]"
         onClick={() => handleClick('github')}>
         <GitHubIcon />
       </Button>
