@@ -33,7 +33,6 @@ const NewEmailForm = () => {
   })
 
   const onSubmit = (value: z.infer<typeof EmailVerifyScheme>) => {
-    console.log(value)
     startTransition(() => {
       newEmail(value, token).then(data => {
         if (data?.error) {
