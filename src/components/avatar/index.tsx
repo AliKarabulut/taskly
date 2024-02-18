@@ -31,7 +31,9 @@ const Avatar = ({ src, name, alt }: AvatarProps) => {
           aria-placeholder={alt ? alt : name || 'avatar'}
         />
       ) : (
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white">{name && getInitials(name)}</div>
+        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-white dark:bg-darkModeNeutral-500 dark:text-darkModeNeutral-50">
+          {name && getInitials(name)}
+        </div>
       )}
     </>
   )

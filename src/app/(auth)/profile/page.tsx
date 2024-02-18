@@ -11,7 +11,6 @@ import { useCurrentUser } from '@/services/get-user-client'
 const Profile = () => {
   const [isPending, startTransition] = useTransition()
   const user = useCurrentUser()
-  console.log(user)
   const emailChangeHandler = (email: string) => {
     startTransition(() => {
       changeEmail({ email }).then(data => {
