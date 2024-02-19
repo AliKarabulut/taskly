@@ -39,7 +39,7 @@ export const POST = async (request: NextRequest) => {
 
     await transporter.sendMail(mailOption)
 
-    return NextResponse.json({ message: '2FA code sent' }, { status: 200 })
+    return NextResponse.json({ message: '2FA code has been sent to your email' }, { status: 200 })
   } catch (err: unknown) {
     return NextResponse.json({ message: 'An error occurred while attempting to send the 2FA code. Please try again' }, { status: 500 })
   }
