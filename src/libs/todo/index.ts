@@ -14,9 +14,24 @@ export const getTodoById = async (id: string) => {
   }
 }
 
+export const getTotalPages = async (userId: string) => {
+  try {
+    const totalTodos = await client.todo.count({
+      where: {
+        userId,
+      },
+    })
+    const totalPages = Math.ceil(totalTodos / 10)
+
+    return totalPages
+  } catch {
+    return null
+  }
+}
+
 export const getTodoByUserId = async (userId: string, page: number) => {
   try {
-    const todo = await client.todo.findMany({
+    const todos = await client.todo.findMany({
       where: {
         userId,
       },
@@ -24,7 +39,7 @@ export const getTodoByUserId = async (userId: string, page: number) => {
       take: 10,
     })
 
-    return todo
+    return todos
   } catch {
     return null
   }
