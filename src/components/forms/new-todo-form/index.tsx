@@ -24,6 +24,7 @@ const NewTodoForm = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    reset,
   } = useForm<z.infer<typeof TodoSchema>>({
     resolver: zodResolver(TodoSchema),
     defaultValues: {
@@ -42,6 +43,7 @@ const NewTodoForm = () => {
           setError(data.error)
         } else if (data?.success) {
           setSuccess(data.success)
+          reset()
         }
       })
     })
