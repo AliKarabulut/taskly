@@ -34,7 +34,7 @@ const Todo = async ({ searchParams: { page = 1 } }: UpdateTodoProps) => {
             {todo?.map(todo => <TableBody key={todo.id} todo={todo} />)}
           </tbody>
         </table>
-        {totalPages && <Pagination totalPages={totalPages} activePage={page} className="flex w-full justify-end" />}
+        {totalPages && <Pagination totalPages={totalPages} activePage={page} className="ml-auto w-fit" />}
       </div>
     </section>
   )

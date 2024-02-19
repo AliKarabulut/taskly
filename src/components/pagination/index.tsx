@@ -58,7 +58,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, activePage, classNa
   }
 
   return (
-    <div className={cn('inline-flex -space-x-px rounded-md shadow-sm', className)}>
+    <div className={cn('flex rounded-md shadow-sm', className)}>
       <button
         onClick={() => clickHandler(-1)}
         className={cn(
