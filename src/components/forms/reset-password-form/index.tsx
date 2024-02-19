@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
 
-import { EmailVerifyScheme } from '@/schemas'
+import { EmailSchema } from '@/schemas'
 import Button from '@/components/button'
 import Input from '@/components/input'
 import { resetPassword } from '@/actions/reset-password'
@@ -21,14 +21,14 @@ const ResetPasswordForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<z.infer<typeof EmailVerifyScheme>>({
-    resolver: zodResolver(EmailVerifyScheme),
+  } = useForm<z.infer<typeof EmailSchema>>({
+    resolver: zodResolver(EmailSchema),
     defaultValues: {
       email: '',
     },
   })
 
-  const onSubmit = (values: z.infer<typeof EmailVerifyScheme>) => {
+  const onSubmit = (values: z.infer<typeof EmailSchema>) => {
     setError('')
     setSuccess('')
     startTransition(() => {

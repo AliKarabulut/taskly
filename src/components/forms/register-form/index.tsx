@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
-import Link from 'next/link'
 
 import { RegisterSchema } from '@/schemas'
 import Button from '@/components/button'
