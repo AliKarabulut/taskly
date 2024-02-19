@@ -13,7 +13,6 @@ import { newEmail } from '@/actions/new-email'
 import FormError from '@/components/form-error'
 import FormSuccess from '@/components/form-success'
 import FormContainer from '@/components/form-container'
-import { signOut } from '@/actions/sign-out'
 
 const NewEmailForm = () => {
   const [isPending, startTransition] = useTransition()
@@ -45,7 +44,6 @@ const NewEmailForm = () => {
         } else if (data?.success) {
           update()
           setSuccess(data.success)
-          signOut()
         }
       })
     })

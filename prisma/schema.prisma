@@ -65,10 +65,11 @@ model Account {
 }
 
 model VerificationToken {
-  id      String   @id @default(cuid())
-  email   String
-  token   String   @unique
-  expires DateTime
+  id       String   @id @default(cuid())
+  email    String
+  oldEmail String?
+  token    String   @unique
+  expires  DateTime
 
   @@unique([email, token])
 }

@@ -5,6 +5,7 @@ import { EmailVerifyScheme } from '@/schemas'
 import { client } from '@/libs/prismadb'
 import { getEmailChangeTokenByToken } from '@/libs/email-change-token'
 import { getUserByEmail } from '@/libs/user'
+import { generateVerificationToken } from '@/libs/token'
 
 export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: string | null) => {
   if (!token) {
@@ -50,18 +51,10 @@ export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: 
     }
   }
 
-  try {
-    await client.user.update({
-      where: {
-        email: existingToken.email,
-      },
-      data: {
-        email,
-        emailVerified: null,
-      },
-    })
-  } catch (error) {
-    throw new Error('An error occurred while changing the email. Please try again.')
+  const verificationToken = await generateVerificationToken(email, existingToken.email)
+
+  if (!verificationToken) {
+    return { error: 'An error occurred while attempting to send the verification email. Please try again.' }
   }
 
   try {
@@ -71,7 +64,22 @@ export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: 
       },
     })
   } catch (error) {
-    console.log('An error occurred while attempting to delete the email replacement token')
+    throw new Error('An error occurred while attempting to delete the email replacement token')
   }
-  return { success: 'Email replacement successfully. Signing out' }
+
+  const response = await fetch(`${process.env.SITE_URL}/api/send-confirmation-mail`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email: verificationToken?.email, token: verificationToken?.token }),
+  })
+
+  const data = await response.json()
+
+  if (response.ok) {
+    return { success: data.message }
+  } else {
+    return { error: data.error }
+  }
 }

@@ -24,6 +24,12 @@ export const changePassword = async (values: z.infer<typeof ChangePasswordScheme
     }
   }
 
+  if (user.isOAuth) {
+    return {
+      error: 'Oauth users cannot change their password',
+    }
+  }
+
   const existingUser = await getUserById(user.id)
 
   if (!existingUser) {
@@ -34,9 +40,10 @@ export const changePassword = async (values: z.infer<typeof ChangePasswordScheme
 
   if (!existingUser.password) {
     return {
-      error: 'User has no password',
+      error: "User's password doesn't exist",
     }
   }
+
   const isPasswordValid = await bcrypt.compare(values.oldPassword, existingUser.password)
 
   if (!isPasswordValid) {

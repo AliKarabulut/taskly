@@ -27,7 +27,7 @@ export const newVerification = async (token: string) => {
     }
   }
 
-  const existingUser = await getUserByEmail(existingToken.email)
+  const existingUser = await getUserByEmail(existingToken.oldEmail ?? existingToken.email)
 
   if (!existingUser) {
     return {
@@ -35,7 +35,7 @@ export const newVerification = async (token: string) => {
     }
   }
 
-  if (existingUser.emailVerified) {
+  if (existingUser.emailVerified && !existingToken.oldEmail) {
     return {
       error: 'User already verified',
     }
