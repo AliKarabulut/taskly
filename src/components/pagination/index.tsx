@@ -41,7 +41,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, activePage, classNa
     return array
   }
 
-  const clickHandler = (value: number): void => {
+  const clickHandler: (value: number) => void = value => {
     if (page + value > 0 && page + value <= totalPages) {
       router.push(`todo/?page=${page + value}`)
       setPage(page + value)
