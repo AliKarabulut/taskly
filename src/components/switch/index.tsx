@@ -9,10 +9,11 @@ type SwitchProps = {
   onChange: (e: boolean) => void
   falseIcon?: React.ReactNode
   trueIcon?: React.ReactNode
+  initialValue?: boolean
 }
 
-const SwitchComponent = ({ name, onChange, falseIcon, trueIcon }: SwitchProps) => {
-  const [enabled, setEnabled] = useState(false)
+const SwitchComponent = ({ name, onChange, falseIcon, trueIcon, initialValue }: SwitchProps) => {
+  const [enabled, setEnabled] = useState<boolean>(initialValue ?? false)
 
   const changeHandler = (e: boolean) => {
     setEnabled(e)

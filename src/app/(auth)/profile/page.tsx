@@ -1,22 +1,41 @@
 'use client'
 import { useTransition } from 'react'
 import toast from 'react-hot-toast'
+import { useSession } from 'next-auth/react'
 
 import { changeEmail } from '@/actions/change-email'
 import Button from '@/components/button'
 // import UserInformationList from '@/components/user-information-list'
 import { useCurrentUser } from '@/services/get-user-client'
-// import SwitchComponent from '@/components/switch'
+import SwitchComponent from '@/components/switch'
+import { toggleTwoFactor } from '@/actions/toggle-two-factor'
+
+export const dynamic = 'force-dynamic'
 
 const Profile = () => {
   const [isPending, startTransition] = useTransition()
   const user = useCurrentUser()
+  const { update } = useSession()
   const emailChangeHandler = (email: string) => {
     startTransition(() => {
       changeEmail({ email }).then(data => {
-        if (data?.error) {
+        if (data.error) {
           toast.error(data.error)
         } else {
+          toast.success(data.success)
+        }
+      })
+    })
+  }
+
+  const twoFactorChangeHandler = (value: boolean) => {
+    startTransition(() => {
+      toggleTwoFactor({ value }).then(data => {
+        if (data.error) {
+          toast.error(data.error)
+        } else if (data.success) {
+          console.log(data)
+          update()
           toast.success(data.success)
         }
       })
@@ -73,10 +92,10 @@ const Profile = () => {
             <li className="flex items-center justify-between gap-6 border-b border-gray-100 py-1.5 ">
               <span className="font-medium first-letter:capitalize ">IsTwoFactorEnabled:</span>
               <div className="flex items-center gap-2">
-                <span className=" inline-flex items-center truncate rounded-md bg-purple-50 px-2 py-1 text-xs font-medium  text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50 dark:ring-purple-400/30">
+                {/* <span className=" inline-flex items-center truncate rounded-md bg-purple-50 px-2 py-1 text-xs font-medium  text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50 dark:ring-purple-400/30">
                   {user.isTwoFactorEnabled ? 'On' : 'Off'}
-                </span>
-                {/* <SwitchComponent /> */}
+                </span> */}
+                <SwitchComponent onChange={twoFactorChangeHandler} initialValue={user.isTwoFactorEnabled} />
               </div>
             </li>
           </>

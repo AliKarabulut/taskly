@@ -106,3 +106,7 @@ export const TodoSchema = z.object({
     }),
   priority: z.enum(['low', 'medium', 'high']),
 })
+
+export const BooleanSchema = z.object({
+  value: z.boolean(),
+})
