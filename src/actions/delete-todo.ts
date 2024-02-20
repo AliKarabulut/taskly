@@ -9,11 +9,15 @@ export const deleteTodo = async (todoId: string) => {
   const existingTodo = await getTodoById(todoId)
 
   if (!existingTodo) {
-    throw new Error("Todo doesn't exist")
+    return {
+      error: "Todo doesn't exist",
+    }
   }
 
   if (existingTodo?.userId !== user?.id) {
-    throw new Error("Todo doesn't exist")
+    return {
+      error: "Todo doesn't exist",
+    }
   }
 
   try {
@@ -25,6 +29,6 @@ export const deleteTodo = async (todoId: string) => {
 
     return { success: 'Todo deleted successfully' }
   } catch {
-    throw new Error('An error occurred while deleting the todo. Please try again.')
+    return { error: 'An error occurred while deleting the todo. Please try again.' }
   }
 }

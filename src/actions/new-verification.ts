@@ -64,7 +64,7 @@ export const newVerification = async (token: string) => {
       },
     })
   } catch (error) {
-    console.log('An error occurred while attempting to delete the verification token.')
+    throw new Error('An error occurred while attempting to delete the verification token.')
   }
   return {
     success: 'Email verified',

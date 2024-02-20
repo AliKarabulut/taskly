@@ -58,7 +58,7 @@ export const newPassword = async (values: z.infer<typeof NewPasswordScheme>, tok
       },
     })
   } catch (error) {
-    throw new Error('An error occurred while changing the password. Please try again.')
+    return { error: 'An error occurred while changing the password. Please try again.' }
   }
 
   try {
@@ -68,7 +68,7 @@ export const newPassword = async (values: z.infer<typeof NewPasswordScheme>, tok
       },
     })
   } catch (error) {
-    console.log('An error occurred while attempting to delete the password reset token')
+    throw new Error('An error occurred while attempting to delete the password reset token')
   }
   return { success: 'Password reset successfully' }
 }
