@@ -1,20 +1,20 @@
 'use server'
 import { z } from 'zod'
 
-import { EmailVerifyScheme } from '@/schemas'
+import { EmailSchema } from '@/schemas'
 import { client } from '@/libs/prismadb'
 import { getEmailChangeTokenByToken } from '@/libs/email-change-token'
 import { getUserByEmail } from '@/libs/user'
 import { generateVerificationToken } from '@/libs/token'
 
-export const newEmail = async (value: z.infer<typeof EmailVerifyScheme>, token: string | null) => {
+export const newEmail = async (value: z.infer<typeof EmailSchema>, token: string | null) => {
   if (!token) {
     return {
       error: 'Token is required',
     }
   }
 
-  const validateValues = EmailVerifyScheme.safeParse(value)
+  const validateValues = EmailSchema.safeParse(value)
 
   if (!validateValues.success) {
     return { error: 'Invalid credentials!' }

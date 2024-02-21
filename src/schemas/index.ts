@@ -38,18 +38,6 @@ export const EmailSchema = z.object({
   email: z.string().email(),
 })
 
-export const EmailVerifyScheme = z
-  .object({
-    email: z.string().email({
-      message: 'Email is required',
-    }),
-    confirmEmail: z.string().email(),
-  })
-  .refine(data => data.email === data.confirmEmail, {
-    message: 'Emails do not match',
-    path: ['confirmEmail'],
-  })
-
 export const ChangePasswordScheme = z
   .object({
     oldPassword: z.string().min(8, {

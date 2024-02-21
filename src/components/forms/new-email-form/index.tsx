@@ -6,7 +6,7 @@ import { useState, useTransition } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 
-import { EmailVerifyScheme } from '@/schemas'
+import { EmailSchema } from '@/schemas'
 import Button from '@/components/button'
 import Input from '@/components/input'
 import { newEmail } from '@/actions/new-email'
@@ -26,15 +26,14 @@ const NewEmailForm = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<z.infer<typeof EmailVerifyScheme>>({
-    resolver: zodResolver(EmailVerifyScheme),
+  } = useForm<z.infer<typeof EmailSchema>>({
+    resolver: zodResolver(EmailSchema),
     defaultValues: {
       email: '',
-      confirmEmail: '',
     },
   })
 
-  const onSubmit = (value: z.infer<typeof EmailVerifyScheme>) => {
+  const onSubmit = (value: z.infer<typeof EmailSchema>) => {
     setError('')
     setSuccess('')
     startTransition(() => {
@@ -53,7 +52,6 @@ const NewEmailForm = () => {
     <FormContainer title="New Email">
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <Input label="Email" type="email" {...register('email')} error={errors.email?.message} />
-        <Input label="Repeat Email" type="email" {...register('confirmEmail')} error={errors.email?.message} />
         <div>
           {error && <FormError message={error} />}
           {success && <FormSuccess message={success} />}
