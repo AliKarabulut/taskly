@@ -10,8 +10,6 @@ import { useCurrentUser } from '@/services/get-user-client'
 import SwitchComponent from '@/components/switch'
 import { toggleTwoFactor } from '@/actions/toggle-two-factor'
 
-export const dynamic = 'force-dynamic'
-
 const Profile = () => {
   const [isPending, startTransition] = useTransition()
   const user = useCurrentUser()
