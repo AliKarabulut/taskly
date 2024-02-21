@@ -58,8 +58,8 @@ const LoginForm = () => {
           <>
             <Input label="Email address" type="email" {...register('email')} error={errors.email?.message} />
             <Input label="Password" type="password" {...register('password')} error={errors.password?.message} />
-            <div className="flex items-center justify-between">
-              <Checkbox label="Remember me" {...register('rememberMe')} />
+            <div className="flex items-center justify-end">
+              {/* <Checkbox label="Remember me" {...register('rememberMe')} /> */}
               <Button href="/reset-password" label="Forgot password" variant="ghost" className="w-fit leading-6" />
             </div>
           </>
