@@ -39,7 +39,7 @@ const Select = ({ error, label, name, setValue, value }: SelectProps) => {
     <Listbox value={selected} onChange={handleOnChange}>
       <div className="relative mt-1">
         <div>
-          <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900">
+          <label htmlFor={name} className="block text-sm font-medium leading-6 text-gray-900 dark:text-darkModeNeutral-100">
             {label}
           </label>
           <Listbox.Button className="relative block w-full cursor-default rounded-md border-0 bg-white px-4 py-1.5 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 dark:bg-darkModeNeutral-200 dark:text-darkModeNeutral-50 sm:text-sm sm:leading-6">

@@ -8,7 +8,6 @@ type UpdateTodoProps = {
     id: string
   }
 }
-export const dynamic = 'force-dynamic'
 
 const UpdateTodo = async ({ searchParams: { id } }: UpdateTodoProps) => {
   const existingTodo = await getTodoById(id)

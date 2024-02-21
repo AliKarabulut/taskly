@@ -7,7 +7,6 @@ import TableHead from '@/components/table-head'
 import { getTodoByUserId, getTotalPages } from '@/libs/todo'
 import { TodoProvider } from '@/store/todo-provider'
 
-export const dynamic = 'force-dynamic'
 type UpdateTodoProps = {
   searchParams: {
     page: number

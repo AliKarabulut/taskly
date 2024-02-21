@@ -34,7 +34,6 @@ const Profile = () => {
         if (data.error) {
           toast.error(data.error)
         } else if (data.success) {
-          console.log(data)
           update()
           toast.success(data.success)
         }
@@ -89,10 +88,12 @@ const Profile = () => {
                 <SwitchComponent onChange={twoFactorChangeHandler} initialValue={user.isTwoFactorEnabled} disabled={isPending} />
               </div>
             </li>
-            <div className="mt-4 flex justify-end gap-6">
-              <Button href="/change-password" label="Change Password" disabled={isPending} className="w-fit" />
-              <Button label="Change Email" disabled={isPending} className="w-fit" onClick={() => emailChangeHandler(user?.email ?? '')} />
-            </div>
+            {!user.isOAuth && (
+              <div className="mt-4 flex justify-end gap-6">
+                <Button href="/change-password" label="Change Password" disabled={isPending} className="w-fit" />
+                <Button label="Change Email" disabled={isPending} className="w-fit" onClick={() => emailChangeHandler(user?.email ?? '')} />
+              </div>
+            )}
           </>
         ) : (
           <div>User Data Not Found</div>

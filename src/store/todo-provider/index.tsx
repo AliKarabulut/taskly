@@ -29,7 +29,6 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
   const router = useRouter()
 
   const toggleTodoToDelete = (id: string, shouldDelete: boolean) => {
-    console.log('id', id, 'shouldDelete', shouldDelete)
     if (shouldDelete) {
       setTodosToDelete([...todosToDelete, id])
     } else {
