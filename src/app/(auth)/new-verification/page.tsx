@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation'
 import BeatLoader from 'react-spinners/BeatLoader'
 import { useEffect, useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 
 import Button from '@/components/button'
 import { newVerification } from '@/actions/new-verification'
@@ -14,6 +15,7 @@ const NewVerification = () => {
   const [success, setSuccess] = useState<string | undefined>('')
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
+  const router = useRouter()
 
   const onSubmit = useCallback(async () => {
     if (error || success) return
@@ -30,6 +32,7 @@ const NewVerification = () => {
     } else if (response.success) {
       setSuccess(response.success)
       setError('')
+      router.push('/login')
       return
     }
   }, [token, error, success])
