@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 import { RegisterSchema } from '@/schemas'
 import Button from '@/components/button'
@@ -15,9 +16,10 @@ import FormContainer from '@/components/form-container'
 import Seperator from '@/components/seperator'
 
 const RegisterForm = () => {
+  const params = useSearchParams()
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>('')
-  const [success, setSuccess] = useState<string | null>('')
+  const [error, setError] = useState<string | null>(params.get('error') ? 'User has signed in with another provider' : null)
+  const [success, setSuccess] = useState<string | null>(null)
 
   const {
     register,

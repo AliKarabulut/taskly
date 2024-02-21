@@ -3,11 +3,12 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 import { LoginSchema } from '@/schemas'
 import Button from '@/components/button'
 import Input from '@/components/input'
-import Checkbox from '@/components/checkbox'
+// import Checkbox from '@/components/checkbox'
 import { login } from '@/actions/login'
 import LoginProvider from '@/components/login-providers'
 import FormError from '@/components/form-error'
@@ -16,10 +17,12 @@ import FormContainer from '@/components/form-container'
 import Seperator from '@/components/seperator'
 
 const LoginForm = () => {
+  const params = useSearchParams()
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>('')
-  const [success, setSuccess] = useState<string | null>('')
+  const [error, setError] = useState<string | null>(params.get('error') ? 'User has signed in with another provider' : null)
+  const [success, setSuccess] = useState<string | null>(null)
   const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false)
+
   const {
     register,
     handleSubmit,
