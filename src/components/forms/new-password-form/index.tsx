@@ -15,8 +15,8 @@ import FormContainer from '@/components/form-container'
 
 const NewPasswordForm = () => {
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>('')
-  const [success, setSuccess] = useState<string | null>('')
+  const [error, setError] = useState<string>('')
+  const [success, setSuccess] = useState<string>('')
 
   const searchParams = useSearchParams()
   const token = searchParams.get('token')

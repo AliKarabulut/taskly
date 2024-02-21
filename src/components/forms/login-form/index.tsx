@@ -19,8 +19,8 @@ import Seperator from '@/components/seperator'
 const LoginForm = () => {
   const params = useSearchParams()
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>(params.get('error') ? 'User has signed in with another provider' : null)
-  const [success, setSuccess] = useState<string | null>(null)
+  const [error, setError] = useState<string>(params.get('error') ? 'User has signed in with another provider' : '')
+  const [success, setSuccess] = useState<string>('')
   const [showTwoFactor, setShowTwoFactor] = useState<boolean>(false)
 
   const {

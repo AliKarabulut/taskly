@@ -24,8 +24,8 @@ type UpdateTodoFormProps = {
 
 const UpdateTodoForm = ({ existingTodo }: UpdateTodoFormProps) => {
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>('')
-  const [success, setSuccess] = useState<string | null>('')
+  const [error, setError] = useState<string>('')
+  const [success, setSuccess] = useState<string>('')
 
   const {
     register,

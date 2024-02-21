@@ -16,8 +16,8 @@ import FormContainer from '@/components/form-container'
 
 const NewTodoForm = () => {
   const [isPending, startTransition] = useTransition()
-  const [error, setError] = useState<string | null>('')
-  const [success, setSuccess] = useState<string | null>('')
+  const [error, setError] = useState<string>('')
+  const [success, setSuccess] = useState<string>('')
   const user = useCurrentUser()
   const {
     register,

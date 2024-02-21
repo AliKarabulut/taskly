@@ -11,8 +11,8 @@ import FormSuccess from '@/components/form-success'
 import FormContainer from '@/components/form-container'
 
 const NewVerification = () => {
-  const [error, setError] = useState<string | undefined>('')
-  const [success, setSuccess] = useState<string | undefined>('')
+  const [error, setError] = useState<string>('')
+  const [success, setSuccess] = useState<string>('')
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
   const router = useRouter()
