@@ -80,7 +80,7 @@ const Profile = () => {
               </span>
             </li>
             <li className="flex items-center justify-between gap-6 border-b border-gray-100 py-3 ">
-              <span className="font-medium first-letter:capitalize ">IsTwoFactorEnabled:</span>
+              <span className="font-medium first-letter:capitalize ">Is 2FA Activated?:</span>
               <div className="flex items-center gap-2">
                 {/* <span className=" inline-flex items-center truncate rounded-md bg-purple-50 px-2 py-1 text-xs font-medium  text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50 dark:ring-purple-400/30">
                   {user.isTwoFactorEnabled ? 'On' : 'Off'}
