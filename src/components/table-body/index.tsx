@@ -21,21 +21,21 @@ type TableBodyProps = {
 }
 
 const TableBody = ({ todo }: TableBodyProps) => {
-  const [pending, setPending] = useState<boolean>(false)
+  const [btnPending, setBtnPending] = useState<boolean>(false)
   const router = useRouter()
-  const { toggleTodoToDelete, todosToDelete } = useContext(TodoContext)
+  const { toggleTodoToDelete, todosToDelete, pending } = useContext(TodoContext)
 
   const deleteHandler = async (id: string) => {
-    setPending(true)
+    setBtnPending(true)
     toast.promise(deleteTodos([id]), {
       loading: 'Deleting todo...',
       success: (data: { success: string }) => {
-        setPending(false)
+        setBtnPending(false)
         router.refresh()
         return data.success
       },
       error: (err: Error) => {
-        setPending(false)
+        setBtnPending(false)
         return err.message
       },
     })
@@ -71,15 +71,13 @@ const TableBody = ({ todo }: TableBodyProps) => {
         </Link>
       </td>
       <td className="col-span-1">
-        <button type="button" onClick={() => deleteHandler(todo.id)} disabled={pending}>
+        <button type="button" onClick={() => deleteHandler(todo.id)} disabled={btnPending || pending || todosToDelete.includes(todo.id)}>
           <TrashIcon
             width={20}
-            className={cn(
-              'cursor-pointer transition-all hover:text-red-500 dark:text-darkModeNeutral-100 dark:hover:text-darkModeNeutral-50',
-              {
-                'text-gray-400 hover:text-gray-400': pending,
-              },
-            )}
+            className={cn('transition-all  dark:text-darkModeNeutral-100 ', {
+              'text-gray-400 hover:text-gray-400': pending,
+              'cursor-pointer hover:text-red-500 dark:hover:text-darkModeNeutral-50': !todosToDelete.includes(todo.id),
+            })}
           />
         </button>
       </td>
