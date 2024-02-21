@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply dark:bg-darkModeNeutral-800 flex min-h-screen flex-col justify-between;
+  @apply flex min-h-screen flex-col justify-between dark:bg-darkModeNeutral-800;
 }
 
 section {
@@ -12,4 +12,11 @@ section {
 
 td {
   @apply flex items-center;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
 }
