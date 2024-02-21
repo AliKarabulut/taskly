@@ -1,13 +1,14 @@
-'use client'
 import { forwardRef } from 'react'
 
 type CheckboxProps = {
   name: string
   label: string
   srOnly?: boolean
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  checked?: boolean
 }
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ name, label, srOnly, ...props }, ref) => {
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ name, label, srOnly, onChange, checked, ...props }, ref) => {
   return (
     <div className="flex items-center">
       <input
@@ -15,6 +16,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ name, label, srO
         name={name}
         type="checkbox"
         ref={ref}
+        checked={checked}
+        onChange={onChange}
         {...props}
         className="h-4 w-4 rounded border-gray-300 text-indigo-600  focus:ring-indigo-600 dark:border-darkModeNeutral-50 dark:bg-darkModeNeutral-100 dark:text-darkModeNeutral-50 dark:ring-0 dark:focus:ring-neutral-300"
       />

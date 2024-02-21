@@ -3,32 +3,32 @@ import { client } from '@/libs/prismadb'
 import { getTodoById } from '@/libs/todo'
 import getUserInformation from '@/actions/get-user-information'
 
-export const deleteTodo = async (todoId: string) => {
+export const deleteTodos = async (todoIds: string[]) => {
   const user = await getUserInformation()
 
-  const existingTodo = await getTodoById(todoId)
+  const existingTodos = await Promise.all(todoIds.map(todoId => getTodoById(todoId)))
 
-  if (!existingTodo) {
-    return {
-      error: "Todo doesn't exist",
-    }
+  const nonExistingTodo = existingTodos.find(todo => !todo)
+  if (nonExistingTodo) {
+    throw new Error("One or more todos don't exist")
   }
 
-  if (existingTodo?.userId !== user?.id) {
-    return {
-      error: "Todo doesn't exist",
-    }
+  const unauthorizedTodo = existingTodos.find(todo => todo?.userId !== user?.id)
+  if (unauthorizedTodo) {
+    throw new Error("One or more todos don't belong to the current user")
   }
 
   try {
-    await client.todo.delete({
+    await client.todo.deleteMany({
       where: {
-        id: existingTodo.id,
+        id: {
+          in: todoIds,
+        },
       },
     })
 
-    return { success: 'Todo deleted successfully' }
+    return { success: 'Todos deleted successfully' }
   } catch {
-    return { error: 'An error occurred while deleting the todo. Please try again.' }
+    throw new Error('An error occurred while deleting the todos. Please try again.')
   }
 }

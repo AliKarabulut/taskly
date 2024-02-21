@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, createContext, Dispatch, SetStateAction } from 'react'
+import { useState, createContext, Dispatch, SetStateAction } from 'react'
 
 type ThemeProviderProps = {
   theme: string

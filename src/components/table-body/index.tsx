@@ -2,10 +2,11 @@
 import Link from 'next/link'
 import { TrashIcon } from '@heroicons/react/24/outline'
 import toast from 'react-hot-toast'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { deleteTodo } from '@/actions/delete-todo'
+import { TodoContext } from '@/store/todo-provider'
+import { deleteTodos } from '@/actions/delete-todo'
 import Checkbox from '@/components/checkbox'
 import cn from '@/utils/cn'
 
@@ -22,9 +23,11 @@ type TableBodyProps = {
 const TableBody = ({ todo }: TableBodyProps) => {
   const [pending, setPending] = useState<boolean>(false)
   const router = useRouter()
+  const { toggleTodoToDelete, todosToDelete } = useContext(TodoContext)
+
   const deleteHandler = async (id: string) => {
     setPending(true)
-    toast.promise(deleteTodo(id), {
+    toast.promise(deleteTodos([id]), {
       loading: 'Deleting todo...',
       success: (data: { success: string }) => {
         setPending(false)
@@ -37,10 +40,14 @@ const TableBody = ({ todo }: TableBodyProps) => {
       },
     })
   }
+
+  const checkboxHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    toggleTodoToDelete(todo.id, e.target.checked)
+  }
   return (
     <tr className=" grid grid-cols-12">
       <td className="col-span-1">
-        <Checkbox name={todo.title} label={todo.title} srOnly />
+        <Checkbox name={todo.title} label={todo.title} srOnly onChange={checkboxHandler} checked={todosToDelete.includes(todo.id)} />
       </td>
       <td className="col-span-3 truncate text-pretty break-words py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-darkModeNeutral-100 sm:pl-0">
         {todo.title}
