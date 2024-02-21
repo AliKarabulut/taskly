@@ -46,7 +46,7 @@ const TableBody = ({ todo }: TableBodyProps) => {
   }
   return (
     <tr className="relative grid grid-cols-12">
-      <td className="col-span-1">
+      <td className="col-span-1 p-0">
         <Checkbox
           name={todo.title}
           label={todo.title}

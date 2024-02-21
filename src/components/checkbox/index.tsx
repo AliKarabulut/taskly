@@ -34,7 +34,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({ name, label, srO
           {label}
         </label>
       </div>
-      {withLine && checked && <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-gray-200" />}
+      {withLine && checked && (
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-gray-200 dark:bg-darkModeNeutral-100" />
+      )}
     </>
   )
 })
