@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import GitHubIcon from '../icons/github'
 import InstagramIcon from '../icons/instagram'
 import LinkedInIcon from '../icons/linkedin'
@@ -38,7 +40,12 @@ const Footer = () => {
           ))}
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
-          <p className="text-center text-xs leading-5 text-gray-500 dark:text-darkModeNeutral-50">&copy; 2024 Ali Karabulut.</p>
+          <Link
+            href="https://www.linkedin.com/in/karabulutali/"
+            target="_blank"
+            className="text-center text-xs leading-5 text-gray-500 dark:text-darkModeNeutral-50">
+            &copy; 2024 Ali Karabulut.
+          </Link>
         </div>
       </div>
     </footer>

@@ -36,7 +36,7 @@ export const POST = async (request: NextRequest) => {
         <h1>Change Your Email</h1>
         <p>Click the link below to change your email.</p>
         <p>If you didn't request this, please ignore this email.</p>
-        <a href="${confirmLink}">Change Email</a>
+        <a href="${confirmLink}" target='_blank'>Change Email</a>
       `,
     }
 

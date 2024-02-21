@@ -35,7 +35,7 @@ export const POST = async (request: NextRequest) => {
       html: `
         <h1>Confirm your email</h1>
         <p>Click the link below to confirm your email address.</p>
-        <a href="${confirmLink}">Confirm email</a>
+        <a href="${confirmLink}" target='_blank'>Confirm email</a>
       `,
     }
 

@@ -35,7 +35,7 @@ export const POST = async (request: NextRequest) => {
       html: `
         <h1>Reset Your Password</h1>
         <p>Click the link below to reset your password.</p>
-        <a href="${confirmLink}">Reset Password</a>
+        <a href="${confirmLink}" target='_blank'>Reset Password</a>
       `,
     }
 
