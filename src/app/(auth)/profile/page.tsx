@@ -95,7 +95,7 @@ const Profile = () => {
                 {/* <span className=" inline-flex items-center truncate rounded-md bg-purple-50 px-2 py-1 text-xs font-medium  text-purple-700 ring-1 ring-inset ring-purple-700/10 dark:bg-darkModeNeutral-600 dark:text-darkModeNeutral-50 dark:ring-purple-400/30">
                   {user.isTwoFactorEnabled ? 'On' : 'Off'}
                 </span> */}
-                <SwitchComponent onChange={twoFactorChangeHandler} initialValue={user.isTwoFactorEnabled} />
+                <SwitchComponent onChange={twoFactorChangeHandler} initialValue={user.isTwoFactorEnabled} disabled={isPending} />
               </div>
             </li>
           </>
