@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 
 import { TodoSchema } from '@/schemas'
 import Button from '@/components/button'
@@ -26,7 +27,7 @@ const UpdateTodoForm = ({ existingTodo }: UpdateTodoFormProps) => {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string>('')
   const [success, setSuccess] = useState<string>('')
-
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -50,6 +51,7 @@ const UpdateTodoForm = ({ existingTodo }: UpdateTodoFormProps) => {
           setError(data.error)
         } else if (data?.success) {
           setSuccess(data.success)
+          router.refresh()
         }
       })
     })
