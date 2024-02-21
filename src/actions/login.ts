@@ -1,6 +1,7 @@
 'use server'
 import { z } from 'zod'
 import { AuthError } from 'next-auth'
+import bcrypt from 'bcryptjs'
 
 import { client } from '@/libs/prismadb'
 import { LoginSchema } from '@/schemas'
@@ -24,6 +25,13 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
 
   if (!existingUser) {
     return { error: 'Email does not exist' }
+  }
+
+  if (existingUser.password) {
+    const isPasswordCorrect = await bcrypt.compare(password, existingUser.password)
+    if (!isPasswordCorrect) {
+      return { error: 'Invalid credentials' }
+    }
   }
 
   if (!existingUser.emailVerified) {
