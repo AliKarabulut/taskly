@@ -33,13 +33,17 @@ const Todo = async ({ searchParams: { page = 1 } }: UpdateTodoProps) => {
               <Button href="/new-todo" label="New Todo" />
             </div>
           </div>
-          <table className="min-w-full divide-y divide-gray-400 overflow-x-auto py-2 align-middle dark:divide-darkModeNeutral-300">
-            <TableHead />
-            <tbody className="divide-y divide-gray-200 dark:divide-darkModeNeutral-300">
-              {todo?.map(todo => <TableBody key={todo.id} todo={todo} />)}
-            </tbody>
-          </table>
-          {totalPages && <Pagination totalPages={totalPages} activePage={page} className="ml-auto w-fit" />}
+          {todo && todo.length > 0 && (
+            <table className="min-w-full divide-y divide-gray-400 overflow-x-auto py-2 align-middle dark:divide-darkModeNeutral-300">
+              <TableHead />
+              <tbody className="divide-y divide-gray-200 dark:divide-darkModeNeutral-300">
+                {todo.map(todo => (
+                  <TableBody key={todo.id} todo={todo} />
+                ))}
+              </tbody>
+            </table>
+          )}
+          {Number(totalPages) > 0 && <Pagination totalPages={Number(totalPages)} activePage={page} className="ml-auto w-fit" />}
         </div>
       </section>
     </TodoProvider>
