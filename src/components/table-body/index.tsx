@@ -45,9 +45,16 @@ const TableBody = ({ todo }: TableBodyProps) => {
     toggleTodoToDelete(todo.id, e.target.checked)
   }
   return (
-    <tr className=" grid grid-cols-12">
+    <tr className="relative grid grid-cols-12">
       <td className="col-span-1">
-        <Checkbox name={todo.title} label={todo.title} srOnly onChange={checkboxHandler} checked={todosToDelete.includes(todo.id)} />
+        <Checkbox
+          name={todo.title}
+          label={todo.title}
+          srOnly
+          onChange={checkboxHandler}
+          checked={todosToDelete.includes(todo.id)}
+          withLine
+        />
       </td>
       <td className="col-span-3 truncate text-pretty break-words py-4 pl-4 pr-3 text-sm font-medium text-gray-900 dark:text-darkModeNeutral-100 sm:pl-0">
         {todo.title}

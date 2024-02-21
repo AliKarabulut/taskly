@@ -29,8 +29,8 @@ const Todo = async ({ searchParams: { page = 1 } }: UpdateTodoProps) => {
               <p className="mt-2 text-sm text-gray-700 dark:text-darkModeNeutral-50">A list of all the todo</p>
             </div>
             <div className="mt-4 flex gap-4 sm:ml-16 sm:mt-0">
-              <Button href="/new-todo" label="Add Todo"></Button>
               <DeleteSelectedTodosButton />
+              <Button href="/new-todo" label="New Todo" />
             </div>
           </div>
           <table className="min-w-full divide-y divide-gray-400 overflow-x-auto py-2 align-middle dark:divide-darkModeNeutral-300">
