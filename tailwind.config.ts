@@ -23,6 +23,15 @@ const config: Config = {
           50: '#738496',
         },
       },
+      animation: {
+        scale: 'scale 1s ease-in-out infinite',
+      },
+      keyframes: {
+        scale: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '33%': { transform: 'scale(.3)' },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],
