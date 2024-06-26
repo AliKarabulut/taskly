@@ -6,7 +6,6 @@ import { Disclosure } from '@headlessui/react'
 
 import cn from '@/utils/cn'
 import { navigation, user } from '@/constants/header'
-import Notification from '@/components/header/notification'
 import Avatar from '@/components/avatar'
 import { signOut } from '@/actions/sign-out'
 
